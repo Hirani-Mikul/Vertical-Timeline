@@ -5,22 +5,31 @@
 }
 
 body {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .timeline {
-  width: 700px;
-  padding: 10px 8px;
+  width: 920px;
+  border: .1rem solid #aaa;
+  padding: 10px;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  width: 500px;
+  width: 400px;
   margin: 20px 0;
   position: relative;
+}
+
+.card.right {
+  /* Move by half the container size + 
+  (50px) distance between vertical line and info + 
+  (5px) to count for borders and padding.*/
+  left: calc(50% + 50px + 5px);
+
 }
 
 .card img {
@@ -47,13 +56,19 @@ body {
 .info::after {
   content: "";
   position: absolute;
-  width: 0;
-  height: 0;
-  top: 30px;
-  border-top: 12px solid transparent;
-  border-bottom: 12px solid transparent;
-  border-left: 12px solid #c9c9c9;
-  right: -12px;
+  width: 12px;
+  height: 12px;
+  border-top: .1rem solid #c9c9c9;
+  border-right: .1rem solid #c9c9c9;
+  top: 34px;
+  right: -8px;
+  transform: rotate(45deg);
+}
+
+.card.right .info::after {
+  left: -8px;
+  right: unset;
+  transform: rotate(-135deg);
 }
 
 .info button {
@@ -70,10 +85,15 @@ body {
 
 .offset {
   position: absolute;
-  right: -200px;
   display: flex;
   flex-direction: column;
   height: calc(100% + 25px);
+  right: -250px;
+}
+
+.card.right .offset {
+  left: -250px;
+  right: unset;
 }
 
 .offset span.line {
@@ -81,10 +101,34 @@ body {
   width: 4px;
   border-radius: 10px;
   height: 100%;
-  left: -50%;
   background-color: #333;
   margin-top: 0;
+  /* display: none; */
 }
+
+.offset span.line::before {
+  position: absolute;
+  width: 80px;
+  border-radius: 10px;
+  height: 100%;
+  background-color: red;
+  margin-top: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.card:not(.right) .offset span.line
+{
+  left: -50px;
+}
+
+.card.right .offset span.line {
+  /* right: -53px; */
+  right: -50px;
+}
+
 .offset span.line::after {
   content: "";
   position: absolute;
@@ -97,11 +141,19 @@ body {
   transform: translateX(-50%);
   background-color: white;
 }
+.offset span:not(.line) {
+  min-width: 150px;
+}
 .offset span {
   color: #333;
   font-size: 14px;
   margin-top: 30px;
 }
+
+.right .offset span {
+  text-align: right;
+}
+
 .offset span:last-child {
   font-size: 12px;
   margin-top: 4px;
