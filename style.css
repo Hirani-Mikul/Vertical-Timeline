@@ -21,6 +21,7 @@ body {
   max-width: 92rem;
   border: .1rem solid #aaa;
   position: relative;
+  overflow: hidden;
 }
 
 .timeline::before, .timeline::after {
@@ -92,14 +93,17 @@ body {
   width: 100%;
   height: 100%;
   padding: 1rem 1.4rem;
-  opacity: .3;
   border: .1rem solid #c9c9c9;
   border-radius: .6rem;
-  transition: opacity 300ms 200ms linear;
+  transform: translateX(-110%);
+}
+.card.right .info {
+  transform: translateX(110%);
 }
 
 .card.active .info {
-  opacity: 1;
+  transform: translateX(0);
+  transition: transform 400ms 200ms ease-in;
 }
 
 .card .info h3 {
@@ -176,9 +180,22 @@ body {
   margin-top: .4rem;
 }
 
+
+.timeline.error::before, .timeline.error::after {
+  display: none;
+}
+.timeline.error .message{ 
+  width: 100%;
+  text-align: center;
+  font-size: 3rem;
+}
+.timeline.error .message p {
+  color: red;
+}
+
 @media only screen and (max-width: 900px) {
   .timeline::before, .timeline::after {
-    left: 1.2%;
+    left: 2%;
   }
   .card {
     width: 100%;
@@ -186,13 +203,17 @@ body {
     padding-right: 2rem;
   }
   .card::before {
-    left: calc(1.2% + .1rem);
+    left: calc(2% + .1rem);
     transform: translate(-50%);
   }
 
   .card.right::before {
-    left: calc(1.2% + .1rem);
+    left: calc(2% + .1rem);
     transform: translate(-50%);
+  }
+
+  .card .info {
+    transform: translateX(110%);
   }
 
   .card .info::after {
@@ -209,7 +230,8 @@ body {
 
 @media only screen and (max-width: 680px) {
   .timeline::before, .timeline::after {
-    left: 1.6%;
+    /* left: 1.6%; */
+    left: 3%;
   }
 
   .card {
@@ -225,10 +247,10 @@ body {
     height: .8rem;
     border-width: .5rem;
     top: 5.6rem;
-    left: calc(1.6% + .1rem);
+    left: calc(3% + .1rem);
   }
   .card.right::before {
-    left: calc(1.6% + .1rem);
+    left: calc(3% + .1rem);
   }
 }
 

@@ -1,0 +1,91 @@
+[
+  {
+    "eventTitle": "First Meeting of Samaj",
+    "eventDescription": "The first meeting of Samaj was held at the premises of Manji Arjan and Company where Mr. Karsanbhai Devraj Vekaria of gaam Baladia was appointed as the First Chairman. The main objective of this meeting was to build a community (Samaj) building in Mombasa, Kenya and raise funds for the same.",
+    "eventDate": "09 March 1946",
+    "eventTime": "10:00 AM",
+    "eventImage": "./images/mrs-banner-1024x457-1.jpg",
+    "eventItems": [
+      {
+        "item": "Description of item 1"
+      },
+      {
+        "item": "Description of item 2"
+      }
+    ]
+  },
+  {
+    "eventTitle": "Rules and Regulation",
+    "eventDescription": "First meeting was convened to deliberate on the Rules and regulation of the Samaj.",
+    "eventDate": "06 April 1946",
+    "eventTime": "11:00 AM",
+    "eventImage": "./images/samaj-under-construction.jpg"
+  },
+  {
+    "eventTitle": "Foundation Laying",
+    "eventDescription": "The foundation stone laying ceremony of Mombasa Samaj conducted.",
+    "eventDate": "03 January 1948",
+    "eventTime": "12:00 PM",
+    "eventImage": "./images/samaj-under-construction.jpg"
+  },
+  {
+    "eventTitle": "Opening Ceremony",
+    "eventDescription": "Opening ceremony for Mombasa Samaj.",
+    "eventDate": "15 August 1949 ",
+    "eventTime": "06:00 AM",
+    "eventImage": ""
+  },
+  {
+    "eventTitle": "Construcion Proposal",
+    "eventDescription": "Proposal to construct a building for Nairobi Samaj was put forward by Mr. Ramjibhai Kunverji of Gaam Baladia.",
+    "eventDate": "25 August 1951 ",
+    "eventTime": "07:00 AM",
+    "eventImage": ""
+  },
+  {
+    "eventTitle": "",
+    "eventDescription": "Approval for construction of Nairobi Samaj Building was given.",
+    "eventDate": "24 November 1951 ",
+    "eventTime": "08:00 AM",
+    "eventImage": ""
+  },
+  {
+    "eventTitle": "",
+    "eventDescription": "Approval for purchase of Land to construct Nairobi Samaj was given.",
+    "eventDate": "06 July 1952 ",
+    "eventTime": "09:00 AM",
+    "eventImage": ""
+  },
+  {
+    "eventTitle": "",
+    "eventDescription": "– Purchase of Land on Ronald Ngala Street in Nairobi for construction of Nairobi Samaj at a value of Kenya Shillings 180,000.00.",
+    "eventDate": "03 August 1952 ",
+    "eventTime": "10:00 AM",
+    "eventImage": ""
+  },
+  {
+    "eventTitle": "",
+    "eventDescription": "Shree Cutchi Leva Patel Samaj, Nairobi was officially registered as per the laws of Kenya.",
+    "eventDate": "11 February 1953 ",
+    "eventTime": "01:00 PM",
+    "eventImage": ""
+  },
+  {
+    "eventTitle": "Inauguration",
+    "eventDescription": "Inauguration of the Nairobi Samaj building.",
+    "eventDate": "25 December 1954 ",
+    "eventTime": "02:00 PM",
+    "eventImage": "./images/smc-4.jpg",
+    "eventItems": [
+      {
+        "item": "The inauguration of the Main Entrance was carried out by Mr. Khimjibhai Ramji and Mr. Bhimjibhai Ramji of Gaam Baladia."
+      },
+      {
+        "item": "The inauguration of the Main Hall was carried out by Mr. Ramjibhai Kunverji of Gaam Baladia."
+      },
+      {
+        "item": "The Guest House was inaugurated by Mr. Lajibhai Harji in Memory of Nanjibhai Harji Varsani of Gaam Manukva."
+      }
+    ]
+  }
+]
