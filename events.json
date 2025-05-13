@@ -3,79 +3,96 @@
     "eventTitle": "First Meeting of Samaj",
     "eventDescription": "The first meeting of Samaj was held at the premises of Manji Arjan and Company where Mr. Karsanbhai Devraj Vekaria of gaam Baladia was appointed as the First Chairman. The main objective of this meeting was to build a community (Samaj) building in Mombasa, Kenya and raise funds for the same.",
     "eventDate": "09 March 1946",
-    "eventTime": "10:00 AM",
-    "eventImage": "./images/mrs-banner-1024x457-1.jpg",
-    "eventItems": [
-      {
-        "item": "Description of item 1"
-      },
-      {
-        "item": "Description of item 2"
-      }
-    ]
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
   },
   {
-    "eventTitle": "Rules and Regulation",
+    "eventTitle": "Rules and Regulations Meeting",
     "eventDescription": "First meeting was convened to deliberate on the Rules and regulation of the Samaj.",
     "eventDate": "06 April 1946",
-    "eventTime": "11:00 AM",
-    "eventImage": "./images/samaj-under-construction.jpg"
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
   },
   {
-    "eventTitle": "Foundation Laying",
+    "eventTitle": "Mombasa Samaj Foundation Ceremony",
     "eventDescription": "The foundation stone laying ceremony of Mombasa Samaj conducted.",
     "eventDate": "03 January 1948",
-    "eventTime": "12:00 PM",
-    "eventImage": "./images/samaj-under-construction.jpg"
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
   },
   {
-    "eventTitle": "Opening Ceremony",
+    "eventTitle": "Mombasa Samaj Opening",
     "eventDescription": "Opening ceremony for Mombasa Samaj.",
-    "eventDate": "15 August 1949 ",
-    "eventTime": "06:00 AM",
-    "eventImage": ""
+    "eventDate": "15 August 1949",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
   },
   {
-    "eventTitle": "Construcion Proposal",
+    "eventTitle": "Nairobi Samaj Construction Proposal",
     "eventDescription": "Proposal to construct a building for Nairobi Samaj was put forward by Mr. Ramjibhai Kunverji of Gaam Baladia.",
-    "eventDate": "25 August 1951 ",
-    "eventTime": "07:00 AM",
-    "eventImage": ""
+    "eventDate": "25 August 1951",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
   },
   {
-    "eventTitle": "",
+    "eventTitle": "Nairobi Samaj Construction Approval",
     "eventDescription": "Approval for construction of Nairobi Samaj Building was given.",
-    "eventDate": "24 November 1951 ",
-    "eventTime": "08:00 AM",
-    "eventImage": ""
+    "eventDate": "24 November 1951",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
   },
   {
-    "eventTitle": "",
+    "eventTitle": "Land Purchase Approval",
     "eventDescription": "Approval for purchase of Land to construct Nairobi Samaj was given.",
-    "eventDate": "06 July 1952 ",
-    "eventTime": "09:00 AM",
-    "eventImage": ""
+    "eventDate": "06 July 1952",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
   },
   {
-    "eventTitle": "",
-    "eventDescription": "– Purchase of Land on Ronald Ngala Street in Nairobi for construction of Nairobi Samaj at a value of Kenya Shillings 180,000.00.",
-    "eventDate": "03 August 1952 ",
-    "eventTime": "10:00 AM",
-    "eventImage": ""
+    "eventTitle": "Land Purchase for Nairobi Samaj",
+    "eventDescription": "Purchase of Land on Ronald Ngala Street in Nairobi for construction of Nairobi Samaj at a value of Kenya Shillings 180,000.00.",
+    "eventDate": "03 August 1952",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
   },
   {
-    "eventTitle": "",
+    "eventTitle": "Official Registration",
     "eventDescription": "Shree Cutchi Leva Patel Samaj, Nairobi was officially registered as per the laws of Kenya.",
-    "eventDate": "11 February 1953 ",
-    "eventTime": "01:00 PM",
-    "eventImage": ""
+    "eventDate": "11 February 1953",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
   },
   {
-    "eventTitle": "Inauguration",
+    "eventTitle": "Nairobi Samaj Foundation Stone Ceremony",
+    "eventDescription": "On the auspicious day of Ramnavmi the Foundation Stone laying Ceremony for Nairobi Samaj Building was held with the donor being Mr. Nanjibhai Harji Varsani of Gaam Manukva.",
+    "eventDate": "23 March 1953",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Construction Commencement",
+    "eventDescription": "Commencement of construction for the building of Nairobi Samaj.",
+    "eventDate": "07 March 1954",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Nairobi Samaj Inauguration",
     "eventDescription": "Inauguration of the Nairobi Samaj building.",
-    "eventDate": "25 December 1954 ",
-    "eventTime": "02:00 PM",
-    "eventImage": "./images/smc-4.jpg",
+    "eventDate": "25 December 1954",
+    "eventTime": "",
+    "eventImage": "",
     "eventItems": [
       {
         "item": "The inauguration of the Main Entrance was carried out by Mr. Khimjibhai Ramji and Mr. Bhimjibhai Ramji of Gaam Baladia."
@@ -87,5 +104,658 @@
         "item": "The Guest House was inaugurated by Mr. Lajibhai Harji in Memory of Nanjibhai Harji Varsani of Gaam Manukva."
       }
     ]
+  },
+  {
+    "eventTitle": "Portrait Placement Approval",
+    "eventDescription": "Permission to place the portrait of Mr. Nanji Harji Varsani in the Main Hall.",
+    "eventDate": "25 December 1954",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Matrimonial Dispute Resolution",
+    "eventDescription": "First meeting to address and possibly mitigate matrimonial disputes.",
+    "eventDate": "05 May 1955",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Swayamsevak Dal Formation",
+    "eventDescription": "Swayamsevak Dal was formed.",
+    "eventDate": "26 December 1955",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Library Inauguration",
+    "eventDescription": "Library was inaugurated and opened.",
+    "eventDate": "26 December 1955",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Nursery Approval",
+    "eventDescription": "Approval to start Nursery at Nairobi Samaj.",
+    "eventDate": "26 December 1955",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Bank Account Opening",
+    "eventDescription": "Approval to open the first Bank account for Nairobi Samaj with The Standard Bank of South Africa.",
+    "eventDate": "12 January 1956",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Child Marriage Abolition Proposal",
+    "eventDescription": "Proposal to abolish child Marriages in the community.",
+    "eventDate": "07 April 1956",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Education Improvement Proposal",
+    "eventDescription": "Proposal and deliberation on how to raise the Education level within the community.",
+    "eventDate": "28 April 1956",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Kutch Earthquake Relief",
+    "eventDescription": "Fund raising for the relief of devastation caused by the disastrous Earth Quack in Kutch.",
+    "eventDate": "26 July 1956",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "School Land Acquisition",
+    "eventDescription": "Approval for acquisition of land parcel for construction of school.",
+    "eventDate": "16 October 1956",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "First Community Gathering",
+    "eventDescription": "First open social gathering of community members.",
+    "eventDate": "26 December 1956",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Building Extension Inauguration",
+    "eventDescription": "Inauguration of extension of the existing samaj building.",
+    "eventDate": "17 April 1960",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Bhuj Boarding Establishment",
+    "eventDescription": "Discussion on establishment of Shree Kutch Leva Patel Samaj Boarding in Bhuj, Kutch.",
+    "eventDate": "08 June 1960",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "First Auditors Appointment",
+    "eventDescription": "Appointment of Patel, Shah and Joshi auditors as the first auditors of the Nairobi Samaj.",
+    "eventDate": "09 November 1960",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "India-China War Support",
+    "eventDescription": "Large amount of cash and precious ornaments were collected as funds by the community members to support India against the invasion by China.",
+    "eventDate": "01 November 1962",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Interest-Free Education Loans",
+    "eventDescription": "Approval for providing interest free loans to community members for higher education.",
+    "eventDate": "24 February 1963",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Student Excellence Recognition",
+    "eventDescription": "Event to honor students who have excelled in their higher education began.",
+    "eventDate": "09 March 1963",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "First Constitution Booklet",
+    "eventDescription": "The first constitution booklet of the Shree Cutchi Leva Patel Samaj Nairobi was issued.",
+    "eventDate": "15 November 1963",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Bhuj Samaj Establishment Discussion",
+    "eventDescription": "A special discussion was held by the Nairobi Samaj regarding the establishment of Shree Cutchi Leva Patel Samaj in Bhuj – Kutch.",
+    "eventDate": "03 July 1965",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Bhuj Samaj Constitution Approval",
+    "eventDescription": "The constitution of SCLP Samaj - Bhuj was approved.",
+    "eventDate": "25 November 1966",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "First Election by Voting",
+    "eventDescription": "Election by voting in Nairobi Samaj was held for the first time for the post of Vice-Chairman.",
+    "eventDate": "21 April 1968",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "15th Anniversary Celebration",
+    "eventDescription": "The 15th anniversary of the Establishment of the Nairobi - Samaj was celebrated, and a souvenir released.",
+    "eventDate": "26 December 1968",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Mombasa Samaj Fundraising",
+    "eventDescription": "Additional funds raised for Mombasa Samaj.",
+    "eventDate": "26 December 1968",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Bhuj Samaj Inauguration Fundraising",
+    "eventDescription": "Fundraising by bidding was held at Nairobi Samaj for inauguration ceremony of the Bhuj Samaj.",
+    "eventDate": "24 May 1970",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": [
+      {
+        "item": "Inauguration of Main Building by Mr. Mavjibhai Ruda Varsani"
+      },
+      {
+        "item": "Inauguration of the upper floor by Mr. Devshibhai Dhanji Vekaria"
+      },
+      {
+        "item": "Inauguration of the meeting room by Mr. Veljibhai Karsan"
+      },
+      {
+        "item": "Foundation stone laying of Kanya High School by Mr. Harjibhai Ladha"
+      }
+    ]
+  },
+  {
+    "eventTitle": "Portrait Placement Approval",
+    "eventDescription": "Approval was given to place the portrait of Mr. Devshibhai Dhanji Vekaria in the Samaj Main Hall.",
+    "eventDate": "27 June 1976",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Mahila Mandal Formation",
+    "eventDescription": "Mahila Mandal – Nairobi Formed.",
+    "eventDate": "28 September 1976",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "First Diwali Gathering",
+    "eventDescription": "The first Diwali get together was held at Nairobi Samaj.",
+    "eventDate": "23 October 1978",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "25th Anniversary Celebration",
+    "eventDescription": "The 25th anniversary of the Establishment of the Samaj – Nairobi was celebrated, and a souvenir released.",
+    "eventDate": "31 December 1979",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Prime Minister Indira Gandhi Visit",
+    "eventDescription": "On the visit to Kenya by The Prime Minister of India, Mrs. Indira Gandhi, she remembered the service of our civilian community ladies during the war with Pakistan was applauded during a courtesy visit to her by a delegation of Nairobi Samaj Leaders and Elders.",
+    "eventDate": "09 August 1981",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "World Conference",
+    "eventDescription": "The Shree Cuchi Leva Patel Samaj \"World Conference\" was held at Bhuj Samaj.",
+    "eventDate": "March 1981",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Political Tension Relief",
+    "eventDescription": "Funds were collected to help the affected community members during political tension in Kenya.",
+    "eventDate": "12 August 1982",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Girls Hostel Fundraising",
+    "eventDescription": "Funds were raised for the Girls Hostel of Pangani Girls Secondary School.",
+    "eventDate": "29 May 1986",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Nairobi West Land Purchase",
+    "eventDescription": "Approval for the purchase of 6.75 acres of land in Nairobi West for New Samaj development.",
+    "eventDate": "21 April 1990",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Nairobi West Complex Construction Approval",
+    "eventDescription": "Approval for the construction of the Samaj - Nairobi West Complex.",
+    "eventDate": "21 October 1991",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": [
+      {
+        "item": "The foundation stone laying ceremony of Nairobi West Samaj Complex was done by Mr. Ratnabhai Karsan Raghwani's family."
+      },
+      {
+        "item": "The foundation stone laying ceremony of the Samaj School was done by Mr. Ramjibhai Govind Halai & Sons."
+      },
+      {
+        "item": "Foundation stone laying ceremony of the Samaj Staff Quarters was done by Mr. Devshibhai Kunvarji Garara's family."
+      },
+      {
+        "item": "The Samaj Hall was to be named 'Shri Devshibhai Dhanji Memorial Hall."
+      },
+      {
+        "item": "The kitchen hall was to be named after Mr. Kunvarji Devraj Varsani & Sons."
+      },
+      {
+        "item": "The health center was to be named after Mr. Gopal Shivji Jadwa Hirani family."
+      }
+    ]
+  },
+  {
+    "eventTitle": "Additional Land Acquisition",
+    "eventDescription": "An additional seven and a half acres of land adjacent to the Samaj land was acquired.",
+    "eventDate": "30 August 1992",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Youth League Formation",
+    "eventDescription": "Samaj Youth League was formed.",
+    "eventDate": "11 November 1992",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Religious Havan Ceremony",
+    "eventDescription": "Religious Havan ceremony for New Nairobi West Samaj was held.",
+    "eventDate": "27 December 1992",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Old Building Rental Decision",
+    "eventDescription": "A decision was made regarding renting the old Samaj Building.",
+    "eventDate": "29 January 1993",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Nairobi West Complex Inauguration",
+    "eventDescription": "The New Nairobi West Samaj Complex was inaugurated.",
+    "eventDate": "09 April 1993",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Board of Governors Formation",
+    "eventDescription": "The Board of Governors (B.O.G) was formed for the management of Samaj School.",
+    "eventDate": "29 November 1993",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Deity Installation",
+    "eventDescription": "Agreed to place the Murtis of The Gods on the stage of samaj hall.",
+    "eventDate": "26 September 1993",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Medical Relief Scheme Approval",
+    "eventDescription": "Approval of rules and regulations of Samaj Medical Relief Scheme (M.R.S).",
+    "eventDate": "29 November 1993",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Samaj School Inauguration",
+    "eventDescription": "Inauguration of the Samaj School.",
+    "eventDate": "January 1994",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Additional Land Acquisition",
+    "eventDescription": "5 acres of land were acquired next to the Samaj Nairobi West Complex.",
+    "eventDate": "21 January 1994",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Drought Relief Fundraising",
+    "eventDescription": "The Samaj in conjunction with Hindu Council of Kenya raised funds for drought relief in Kenya.",
+    "eventDate": "04 March 1994",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Old Building Sale Decision",
+    "eventDescription": "A decision was taken regarding the sale of the Old Samaj building on Ronald Ngala Street.",
+    "eventDate": "17 September 1994",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "First Mass Marriage",
+    "eventDescription": "The first mass marriage was held at Nairobi Samaj.",
+    "eventDate": "10 December 1994",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "School Naming",
+    "eventDescription": "The School at Nairobi West was Named Shree L. R. Pindolia Academy.",
+    "eventDate": "26 March 1995",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Old Building Sale",
+    "eventDescription": "Sale of the Samaj Building on Ronald Ngala Street.",
+    "eventDate": "15 June 1995",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Community Housing Decision",
+    "eventDescription": "It was decided proceeds from the sale of the samaj building on Ronald Ngala Street would be used to build housing for the Community members.",
+    "eventDate": "25 June 1995",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Medical Relief Scheme Launch",
+    "eventDescription": "The Medical Relief Scheme was started.",
+    "eventDate": "1995",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Tree Planting Program",
+    "eventDescription": "A tree planting program was held in the Samaj compound.",
+    "eventDate": "03 March 1996",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Charitable Trust Formation",
+    "eventDescription": "The Shree Cutchi Leva Patel Charitable Trust was formed, and trustees appointed.",
+    "eventDate": "23 June 1996",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Water Tank Donation",
+    "eventDescription": "Warren Enterprises Ltd. and H. Young (EA) donated a tower water tank.",
+    "eventDate": "25 June 1996",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Fund Transfer Decision",
+    "eventDescription": "A decision was made to transfer the medical and bursary funds to Samaj charitable trust.",
+    "eventDate": "25 August 1996",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Samaj Flats Foundation Ceremony",
+    "eventDescription": "Foundation stone laying of Samaj Flat Phase-I was held.",
+    "eventDate": "24 November 1996",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": [
+      {
+        "item": "Mr. Shantilal Velji Bhanderi for Block No. A"
+      },
+      {
+        "item": "Mr. Laljibhai Ratna Raghwani for Block No. B"
+      },
+      {
+        "item": "Laxmanbhai Construction Co. for Block No. C"
+      }
+    ]
+  },
+  {
+    "eventTitle": "Canteen and Library Completion",
+    "eventDescription": "The construction of the canteen and library was completed.",
+    "eventDate": "07 September 1997",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Cricket Ground Completion",
+    "eventDescription": "The work on the Samaj Cricket Ground was completed, and the Samaj Team was named the Shree Cutchi Leva Patel Samaj Cricket Team.",
+    "eventDate": "1997",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "School Management Decision",
+    "eventDescription": "It was decided that the Shree Cutchi Leva Patel Charitable Trust will undertake the management of the Samaj School.",
+    "eventDate": "07 September 1997",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Flats Pricing Decision",
+    "eventDescription": "The average price of Phase I flats in Nairobi West was set at 1,025,000/- for a two-bedroom and 1,225,000/- for a three-bedroom.",
+    "eventDate": "08 March 1998",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Phase I Flats Inauguration",
+    "eventDescription": "The inauguration of Samaj Flats Phase I.",
+    "eventDate": "14 February 1999",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Phase II Flats Foundation Ceremony",
+    "eventDescription": "Foundation stone laying ceremony of Samaj Flats Phase-II was performed by respective donors.",
+    "eventDate": "14 February 1999",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": [
+      {
+        "item": "Mr. Kalyanbhai Naran Kerai for Block No-D in memory of his mother Late Lalbai Naran Kerai"
+      },
+      {
+        "item": "Mr. Karshanbhai Lalji Vekaria and Mrs. Kesarben Karsan Vekaria for Block No-E"
+      },
+      {
+        "item": "Mr. Ramjibhai Keshra Varsani for Block No-F"
+      }
+    ]
+  },
+  {
+    "eventTitle": "Swimming Pool Inauguration",
+    "eventDescription": "Inauguration of swimming pool, donated by the Laxmanbhai Group and the pool named 'Raghwani Pool'.",
+    "eventDate": "14 February 1999",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Phase II Flats Completion",
+    "eventDescription": "The construction of Samaj Flats Phase-II was completed.",
+    "eventDate": "30 April 2000",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Medical Clinic Foundation Ceremony",
+    "eventDescription": "The Foundation stone laying of Samaj Medical Clinic building.",
+    "eventDate": "11 September 2000",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Volleyball Ground Approval",
+    "eventDescription": "Approval for the construction of the volleyball ground.",
+    "eventDate": "12 January 2001",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Nursery School Foundation Ceremony",
+    "eventDescription": "The foundation laying ceremony of the Samaj Nursery School was done by donors Mr. Karsanbhai Lalji Vekaria and Mrs. Kesarbai Karsan Vekaria.",
+    "eventDate": "01 February 2001",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Kutch Earthquake Relief",
+    "eventDescription": "Approved the Samaj Charitable Trust to send Kenya Shillings 1 crore for Kutch earthquake relief to Bhuj Samaj.",
+    "eventDate": "02 February 2001",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Advertisement Billboards Approval",
+    "eventDescription": "Approval was granted for placing 40 billboards for advertisement in the Samaj Cricket Ground.",
+    "eventDate": "13 July 2001",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Clinic Building Inauguration",
+    "eventDescription": "The Samaj Clinic Building was inaugurated, in the name of Mr. Kurjibhai Vishram Vekaria.",
+    "eventDate": "12 December 2001",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Secondary School Completion",
+    "eventDescription": "The construction of Samaj Secondary School Building was completed and named R. R. Varsani Secondary Section.",
+    "eventDate": "19 February 2002",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "River Gabions Completion",
+    "eventDescription": "The work of building gabions on banks on both sides of the river passing through the samaj compound was completed.",
+    "eventDate": "08 March 2002",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Constitutional Amendment",
+    "eventDescription": "The Constitution of the School Board of governors and Samaj Charitable Trust was amended.",
+    "eventDate": "17 January 2003",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "50th Anniversary Celebration",
+    "eventDescription": "The Samaj celebrated its 50th anniversary and the 10th anniversary of the new complex in Nairobi West during Easter Holidays and a souvenir published.",
+    "eventDate": "2003",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
+  },
+  {
+    "eventTitle": "Nursery School Inauguration",
+    "eventDescription": "The inauguration of Samaj Nursery School held during the Samaj Golden Jubilee celebration and the Nursery was named Smt. Amarbai Devshi Dhanji Nursery School.",
+    "eventDate": "2003",
+    "eventTime": "",
+    "eventImage": "",
+    "eventItems": []
   }
 ]
+  

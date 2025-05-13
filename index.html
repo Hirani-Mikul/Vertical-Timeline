@@ -12,9 +12,34 @@
 <body>
 
   <!-- CONTAINER FOR ENTIRE TIMELINE. -->
-  <div class="timeline">
+  <div id="v-timeline" class="timeline">
+    <div class="controls">
+       <!-- Language selector -->
+      <form id="language">
+        <input type="radio" name="language" id="english" value="ENGLISH" checked>
+        <label for="english">English</label>
+        <input type="radio" name="language" id="gujarati" value="GUJARATI">
+        <label for="gujarati">Gujarati</label>
+      </form>
+
+
+      <!-- Sort selector -->
+      <form id="sort">
+        <label for="date">Date: </label>
+        <input type="radio" name="date" id="asc" value="Ascending" checked>
+        <label for="asc">Ascending</label>
+        <input type="radio" name="date" id="desc" value="Descending">
+        <label for="desc">Descending</label>
+      </form>
+
+
+
+    </div>
     <!-- INDIVIDUAL EVENT CARD TO DISPLAY. -->
-   
+   <div class="events"></div>
+   <div class="tl-footer">
+    <p>Failed to load more events!</p>
+   </div>
 
   </div>
 

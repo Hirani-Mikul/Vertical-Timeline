@@ -1,45 +1,136 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
   font-size: 62.5%;
 }
 
-:root {
+.timeline * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.timeline {
+  margin: 10rem auto;
+  width: 100%;
+  max-width: 92rem;
+  border: .1rem solid #aaa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  /* COLORS */
+  
+  --clr-background: #ffffff;
+  --clr-title: #333;
+  --clr-description: #5f5f5f;
+  --clr-secondary: #3f3f3f; 
+  --clr-error: rgb(255, 50, 50);
+
+  --clr-card-border: #c9c9c9;
+
+  /* FONT SIZE */
+  --fs-title: 2rem;
+  --fs-description: 1.8rem;
+  --fs-date: 1.4rem;
+  --fs-time: 1.2rem;
+
+  /* FONT WEIGHT */
+}
+
+.timeline .controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 8rem;
+  border-bottom: .1rem solid #aaa;
+  margin-bottom: 2rem;
+}
+.timeline .controls form {
+  margin: .5rem 0;
+
+}
+.timeline .controls label {
+  font-size: 1.6rem;
+}
+.timeline .controls input {
+  margin: 0 1rem;
+
+}
+
+.timeline .tl-footer {
+  margin-top: 2rem;
+  width: 100%;
+  min-height: 4rem;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.timeline .tl-footer::after, .timeline .tl-footer::before {
+  content: "";
+  position: absolute;
+  width: 2.2rem;
+  height: 2.2rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 1000px;
+  background-color: transparent;
+}
+.timeline .tl-footer::after {
+  background-color: var(--clr-background);
+  width: 3rem;
+  height: 3rem;
+  z-index: -1;
+  border-right: .3rem solid var(--clr-secondary);
+  animation: load 2000ms infinite linear;
+}
+
+.timeline .tl-footer.hidden {
+  display: none;
+}
+
+.timeline .tl-footer p {
+  display: none;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--clr-secondary);
+}
+
+.timeline .tl-footer.error p, .timeline .tl-footer.message p {
+  display: block;
+}
+
+.timeline .tl-footer.error p {
+  color: var(--clr-error); 
+}
+
+
+
+.timeline .events {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
   --TM-lineHeight: 0%;
   --clr-line-hidden: #33333333;
   --clr-line-active: #333;
 }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.timeline {
-  margin: 100rem auto;
-  width: 100%;
-  max-width: 92rem;
-  border: .1rem solid #aaa;
-  position: relative;
-  overflow: hidden;
-}
-
-.timeline::before, .timeline::after {
+.timeline .events::before, .timeline .events::after {
   content: "";
   position: absolute;
   width: .2rem;
   border-radius: 1rem;
-  height: 99%;
-  top: 1%;
   left: 50%;
+  top: 0;
   z-index: -1;
 }
 
-.timeline::after {
+.timeline .events::after {
+  height: 100%;
   background-color: var(--clr-line-hidden);
 }
 
-.timeline::before {
+.timeline .events::before {
   height: var(--TM-lineHeight);
   background-color: var(--clr-line-active);
   transition: height 300ms linear;
@@ -50,12 +141,13 @@ body {
   flex-direction: column;
   width: 50%;
   position: relative;
-  padding: 2rem 6rem 2rem 1rem;
+  padding: .5rem 6rem .5rem 1rem;
 }
+
 
 .card.right {
   left: 50%;
-  margin: 5rem 0;
+  margin: .5rem 0;
   padding-left: 6rem;
   padding-right: 1rem;
 }
@@ -73,10 +165,10 @@ body {
   height: 1.2rem;
   border: .5rem solid var(--clr-line-hidden);
   border-radius: 10rem;
-  top: 5rem;
+  top: 3.5rem;
   right: -.1rem;
   transform: translate(50%);
-  background-color: white;
+  background-color: var(--clr-background);
   transition: border-color 300ms linear;
 }
 .card.active::before {
@@ -92,8 +184,9 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
+  min-height: 8rem;
   padding: 1rem 1.4rem;
-  border: .1rem solid #c9c9c9;
+  border: .1rem solid var(--clr-card-border);
   border-radius: .6rem;
   transform: translateX(-110%);
 }
@@ -107,17 +200,17 @@ body {
 }
 
 .card .info h3 {
-  color: #333;
-  font-size: 2rem;
+  color: var(--clr-title);
+  font-size: var(--fs-title);
   margin: 1rem 0;
 }
 .card .info p {
-  font-size: 1.8rem;
-  color: #5f5f5f;
-  display: -webkit-box;
+  font-size: var(--fs-description);
+  color: var(--clr-description);
+  /* display: -webkit-box;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
-  overflow: hidden;
+  overflow: hidden; */
 }
 
 .card .info::after {
@@ -125,8 +218,8 @@ body {
   position: absolute;
   width: 1.2rem;
   height: 1.2rem;
-  border-top: .1rem solid #c9c9c9;
-  border-right: .1rem solid #c9c9c9;
+  border-top: .1rem solid var(--clr-card-border);
+  border-right: .1rem solid var(--clr-card-border);
   top: 3.4rem;
   right: -.7rem;
   transform: rotate(45deg);
@@ -138,35 +231,24 @@ body {
   transform: rotate(-135deg);
 }
 
-
-.card .info button {
-  font-size: 1.6rem;
-  padding: .8rem 1.6rem;
-  outline: none;
-  border: none;
-  border-radius: .2rem;
-  background-color: grey;
-  color: white;
-  margin-top: 1.6rem;
-  cursor: pointer;
-}
-
 .offset {
   position: absolute;
   display: flex;
   flex-direction: column;
   height: 100%;
-  right: -40%;
+  right: -4rem;
+  transform: translateX(100%);
 }
 
 .card.right .offset {
-  left: -40%;
+  left: -4rem;
+  transform: translateX(-100%);
   right: unset;
 }
 
 .offset span {
-  color: #333;
-  font-size: 1.4rem;
+  color: var(--clr-title);
+  font-size: var(--fs-date);
   margin-top: 3rem;
   min-width: 15rem;
 }
@@ -176,25 +258,22 @@ body {
 }
 
 .offset span:last-child {
-  font-size: 1.2rem;
+  font-size: var(--fs-time);
   margin-top: .4rem;
 }
 
+@keyframes load {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
 
-.timeline.error::before, .timeline.error::after {
-  display: none;
-}
-.timeline.error .message{ 
-  width: 100%;
-  text-align: center;
-  font-size: 3rem;
-}
-.timeline.error .message p {
-  color: red;
-}
 
 @media only screen and (max-width: 900px) {
-  .timeline::before, .timeline::after {
+  .timeline .events::before, .timeline .events::after {
     left: 2%;
   }
   .card {
@@ -229,7 +308,7 @@ body {
 }
 
 @media only screen and (max-width: 680px) {
-  .timeline::before, .timeline::after {
+  .timeline .events::before, .timeline .events::after {
     /* left: 1.6%; */
     left: 3%;
   }
@@ -246,7 +325,7 @@ body {
     width: .8rem;
     height: .8rem;
     border-width: .5rem;
-    top: 5.6rem;
+    top: 3.8rem;
     left: calc(3% + .1rem);
   }
   .card.right::before {
