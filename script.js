@@ -1,12 +1,14 @@
 const timelineElm = document.querySelector('.timeline .events');
+const tlFooterElm = document.getElementById('tl-footer');
 
 let events = []; // Array to hold events
 let isEven = false;
+let tlFooterCurrentClass = null;
 
 
 let SELECTEDLANGUAGE = 'ENGLISH';
 let LASTFETCHEDINDEX = 0;
-const MAXEVENTSTOFETCH = 2;
+const MAXEVENTSTOFETCH = 10;
 
 
 document.getElementById('language').addEventListener('change', (event) => {
@@ -23,8 +25,23 @@ document.getElementById('sort').addEventListener('change', (event) => {
     }
 });
 
+// States: -1 -> Remove state, 0 -> Loading, 1 -> Message, 2 -> Error 
+const toogleTlFooter = (state = 0) => {
+  // Remove previous classes.
+  if (tlFooterCurrentClass != null) tlFooterElm.classList.remove(tlFooterCurrentClass);
 
 
+  if (state == -1) {
+    tlFooterCurrentClass = null;
+    return;
+  }
+  else if (state == 0) tlFooterCurrentClass = 'load';
+  else if (state == 1) tlFooterCurrentClass = 'message';
+  else if (state == 2) tlFooterCurrentClass = 'error';
+  else return;
+
+  tlFooterElm.classList.add(tlFooterCurrentClass);
+}
 
 const fetchEventsFromSource = (sourceUrl) => {
   return new Promise((resolve, reject) => {
@@ -102,6 +119,7 @@ const renderEvents = () => {
   }
 
   LASTFETCHEDINDEX = events.length - 1;
+  
 }
 
 
@@ -198,6 +216,8 @@ const resetTimeline = () => {
 
   document.removeEventListener('scroll', calcTMlineHeight);
 
+  toogleTlFooter(-1); // Remove all states of the footer.
+
   isEven = false;
   LASTFETCHEDINDEX = 0;
   events = [];
@@ -205,29 +225,31 @@ const resetTimeline = () => {
 
 }
 
-const createErrorHTML = (error) => { 
-  timelineElm.classList.add('error');
-  
-  let errorElm = document.createElement('div');
-  errorElm.classList.add('message');
-  errorElm.innerHTML = `
-    <h2>Error Loading Events</h2>
-    <p>${error}</p>
+const createMessageHTML = (status, state = 1) => {
+  toogleTlFooter(state); // Display error.
+  tlFooterElm.innerHTML = `
+    <p>${status}</p>
   `;
-  timelineElm.appendChild(errorElm); // Append the error message to the timeline
 }
 
 
 const fetchAndRenderEvents = async () => {
   
+  toogleTlFooter(); // Load
+
   let status = await fetchEventsFromSource('http://localhost:3000/request.php'); // Load events from JSON file
   
-  if (status != -1 && status != 1) return createErrorHTML(status); 
+  if (status != -1 && status != 1) return createMessageHTML(status, 2); // Display error.
   
-  if (status == -1) return -1; // No more events to render.
+  if (status == -1) {
+    createMessageHTML('END', 1); // Display message
+    return -1; // No more events to render.
+  }
 
   renderEvents();
-  // loadMoreEventsObserver.observe(document.querySelector(".timeline .card:last-child"));
+  toogleTlFooter(-1); // Remove loading.
+
+  loadMoreEventsObserver.observe(document.querySelector(".timeline .card:last-child"));
   
 }
 

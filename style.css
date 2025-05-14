@@ -56,7 +56,7 @@
 
 }
 
-.timeline .tl-footer {
+.timeline #tl-footer {
   margin-top: 2rem;
   width: 100%;
   min-height: 4rem;
@@ -65,7 +65,7 @@
   align-items: center;
   position: relative;
 }
-.timeline .tl-footer::after, .timeline .tl-footer::before {
+.timeline #tl-footer::after, .timeline #tl-footer::before {
   content: "";
   position: absolute;
   width: 2.2rem;
@@ -75,8 +75,9 @@
   transform: translate(-50%, -50%);
   border-radius: 1000px;
   background-color: transparent;
+  display: none;
 }
-.timeline .tl-footer::after {
+.timeline #tl-footer::after {
   background-color: var(--clr-background);
   width: 3rem;
   height: 3rem;
@@ -85,22 +86,23 @@
   animation: load 2000ms infinite linear;
 }
 
-.timeline .tl-footer.hidden {
-  display: none;
+.timeline #tl-footer.load::after, 
+.timeline #tl-footer.load::before {
+  display: block;
 }
 
-.timeline .tl-footer p {
+.timeline #tl-footer p {
   display: none;
   font-size: 1.5rem;
   font-weight: 500;
   color: var(--clr-secondary);
 }
 
-.timeline .tl-footer.error p, .timeline .tl-footer.message p {
+.timeline #tl-footer.error p, .timeline #tl-footer.message p {
   display: block;
 }
 
-.timeline .tl-footer.error p {
+.timeline #tl-footer.error p {
   color: var(--clr-error); 
 }
 
