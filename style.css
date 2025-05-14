@@ -254,10 +254,6 @@
   text-align: right;
 }
 
-.offset span:last-child {
-  font-size: var(--fs-time);
-  margin-top: .4rem;
-}
 
 @keyframes load {
   from {

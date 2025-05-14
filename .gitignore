@@ -2,5 +2,6 @@ script old.js
 style old.css
 index old.html
 backend/
+temp/
 Reminder.txt
 events temp.json

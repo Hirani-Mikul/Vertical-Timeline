@@ -19,8 +19,8 @@
           // Extract data from post body.
 
 
+          $MAXEVENTSTOFETCH = 30;
           $LASTFETCHEDINDEX = $data['LASTFETCHEDINDEX'];
-          $MAXEVENTSTOFETCH = $data['MAXEVENTSTOFETCH'];
           $SELECTEDLANGUAGE = $data['SELECTEDLANGUAGE'];
 
           $json_data_path = "./events.json";
