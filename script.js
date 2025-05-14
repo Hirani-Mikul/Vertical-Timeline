@@ -11,11 +11,17 @@ let LASTFETCHEDINDEX = 0;
 const MAXEVENTSTOFETCH = 10;
 
 
-document.getElementById('language').addEventListener('change', (event) => {
+document.getElementById('language').addEventListener('change', async (event) => {
     if (event.target.type === "radio") {
+      // Disable the selection.
+      event.target.parentElement.querySelectorAll('input').forEach(child => child.disabled = true);
       SELECTEDLANGUAGE = event.target.value;
       resetTimeline();
-      Initiate();
+      await Initiate();
+
+      // Enable the selection.
+      event.target.parentElement.querySelectorAll('input').forEach(child => child.disabled = false);
+
     }
 });
 
@@ -63,7 +69,10 @@ const fetchEventsFromSource = (sourceUrl) => {
           resolve(-1);
           return -1; // -1: No more events.
         }
-        events = [...events, ...data.events];
+        // events = [...events, ...data.events];
+        LASTFETCHEDINDEX = data.LASTFETCHEDINDEX;
+        events = data.events;
+
         resolve(1); // 1: Successfully loaded more events.
       })
       .catch((error) => {
@@ -75,7 +84,7 @@ const fetchEventsFromSource = (sourceUrl) => {
 
 
 const createEventCardHTML = (event, isRight) => {
-  let bTitle = event.eventTitle != "" ? true : false;
+  let bTitle = event.eventTitle ? true : false;
   let bDate = event.eventDate != "" ? true : false;
   let bTime = event.eventTime != "" ? true : false; 
   let bDesc = event.eventDescription != "" ? true : false;
@@ -108,9 +117,9 @@ const createEventCardHTML = (event, isRight) => {
 
 const renderEvents = () => {
 
-  if (events.length <= 0) return;
+  if (events.length <= 0) return 0;
 
-  for (let i = LASTFETCHEDINDEX; i < events.length; i++)
+  for (let i = 0; i < events.length; i++)
   {
     let cardElm = createEventCardHTML(events[i], isEven); // Create event card.
     timelineElm.appendChild(cardElm); // Append the card to the timeline
@@ -118,8 +127,7 @@ const renderEvents = () => {
     showEventsObserver.observe(cardElm); // Observe each cards for entering viewport.
   }
 
-  LASTFETCHEDINDEX = events.length - 1;
-  
+  events = [];
 }
 
 
@@ -204,6 +212,7 @@ const hightlightTMobserver = new IntersectionObserver((entries, observer) => {
 const resetTimeline = () => {
 
   // Unobserve all event cards.
+  timelineElm.innerHTML = '';
   showEventsObserver.disconnect();
 
   // Unobserve the last event card.
@@ -212,7 +221,6 @@ const resetTimeline = () => {
   // Unobserve the timeline events.
   hightlightTMobserver.disconnect();
 
-  timelineElm.innerHTML = '';
 
   document.removeEventListener('scroll', calcTMlineHeight);
 
@@ -221,7 +229,6 @@ const resetTimeline = () => {
   isEven = false;
   LASTFETCHEDINDEX = 0;
   events = [];
-
 
 }
 
@@ -246,7 +253,11 @@ const fetchAndRenderEvents = async () => {
     return -1; // No more events to render.
   }
 
-  renderEvents();
+  if (renderEvents() == 0)
+  {
+    createMessageHTML('NO EVENTS TO DISPLAY!', 1); // Display message
+    return;
+  }
   toogleTlFooter(-1); // Remove loading.
 
   loadMoreEventsObserver.observe(document.querySelector(".timeline .card:last-child"));

@@ -24,7 +24,7 @@
           $SELECTEDLANGUAGE = $data['SELECTEDLANGUAGE'];
 
           $json_data_path = "./events.json";
-          if ($SELECTEDLANGUAGE == 'GUJARATI') $json_data_path = './eventsGuj.json';
+          if ($SELECTEDLANGUAGE == 'GUJARATI') $json_data_path = './events-guj.json';
 
           $json_data = file_get_contents($json_data_path);
           $events = json_decode($json_data, true);
@@ -44,7 +44,7 @@
 
             // Send a 200 OK response with the received data (or a success message)
             http_response_code(200);
-            echo json_encode(['events' => $events]);
+            echo json_encode(['events' => $events, 'LASTFETCHEDINDEX' => $LASTFETCHEDINDEX]);
 
         }
 
