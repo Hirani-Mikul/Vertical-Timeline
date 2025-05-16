@@ -1,5 +1,6 @@
-* {
-  font-size: 62.5%;
+::before, ::after {
+  content: "";
+  position: absolute;
 }
 
 .timeline * {
@@ -13,7 +14,6 @@
     /* COLORS */
   
   --clr-background: #ffffff;
-  --clr-title: #333;
   --clr-description: #5f5f5f;
   --clr-secondary: #3f3f3f; 
   --clr-error: rgb(255, 50, 50);
@@ -22,13 +22,14 @@
   --clr-card-border: #c9c9c9;
 
   /* FONT SIZE */
-  --fs-title: 2rem;
-  --fs-description: 1.8rem;
-  --fs-normal: 1.6rem;
-  --fs-date: 1.4rem;
-  --fs-time: 1.2rem;
+  --fs-description: 1.2rem;
+  --fs-normal: 1.3rem;
+  --fs-date: 1rem;
 
   /* FONT WEIGHT */
+
+  /* IMAGE SIZE */
+  --img-size: 30rem;
 
   margin: 10rem auto;
   width: 100%;
@@ -47,7 +48,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  min-height: 8rem;
+  min-height: 5rem;
   border-bottom: .1rem solid var(--clr-border);
 }
 .timeline .controls label {
@@ -55,7 +56,6 @@
 }
 .timeline .controls input {
   margin: 0 1rem;
-
 }
 
 .timeline #tl-footer {
@@ -66,10 +66,8 @@
   position: relative;
 }
 .timeline #tl-footer.load::after, .timeline #tl-footer.load::before {
-  content: "";
-  position: absolute;
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 1.4rem;
+  height: 1.4rem;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -78,8 +76,8 @@
 }
 .timeline #tl-footer.load::after {
   background-color: var(--clr-background);
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   z-index: -1;
   border-right: .3rem solid var(--clr-secondary);
   animation: load 2000ms infinite linear;
@@ -87,7 +85,7 @@
 
 .timeline #tl-footer p {
   display: none;
-  font-size: var(--fs-normal);
+  font-size: var(--fs-date);
   font-weight: 500;
   color: var(--clr-secondary);
 }
@@ -113,8 +111,6 @@
 }
 
 .timeline .events::before, .timeline .events::after {
-  content: "";
-  position: absolute;
   width: .2rem;
   border-radius: 1rem;
   left: 50%;
@@ -138,29 +134,23 @@
   flex-direction: column;
   width: 50%;
   position: relative;
-  padding: .5rem 6rem .5rem 1rem;
+  padding: 0rem 6rem 0 1rem;
 }
 
 
 .card.right {
+  margin-top: -2%;
   left: 50%;
-  margin: .5rem 0;
   padding-left: 6rem;
   padding-right: 1rem;
 }
 
-.card img {
-  width: 100%;
-  object-fit: cover;
-  max-height: 30rem;
-}
+
 
 .card::before {
-  content: "";
-  position: absolute;
-  width: 1.2rem;
-  height: 1.2rem;
-  border: .5rem solid var(--clr-line-hidden);
+  width: .6rem;
+  height: .6rem;
+  border: .4rem solid var(--clr-line-hidden);
   border-radius: 10rem;
   top: 3.5rem;
   right: -.1rem;
@@ -176,6 +166,7 @@
   left: .1rem;
   transform: translate(-50%);
 }
+
 
 .card .info {
   position: relative;
@@ -196,11 +187,20 @@
   transition: transform 400ms 200ms ease-in;
 }
 
-.card .info h3 {
-  color: var(--clr-title);
-  font-size: var(--fs-title);
-  margin: 1rem 0;
+.card span {
+  display: block;
+  color: var(--clr-secondary);
+  font-size: var(--fs-date);
+  font-weight: 500;
+  margin-bottom: .6rem;
 }
+
+.card .info img {
+  width: 100%;
+  object-fit: cover;
+  max-height: var(--img-size);
+}
+
 .card .info p {
   font-size: var(--fs-description);
   color: var(--clr-description);
@@ -211,8 +211,6 @@
 }
 
 .card .info::after {
-  content: "";
-  position: absolute;
   width: 1.2rem;
   height: 1.2rem;
   border-top: .1rem solid var(--clr-card-border);
@@ -227,33 +225,6 @@
   right: unset;
   transform: rotate(-135deg);
 }
-
-.offset {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  right: -4rem;
-  transform: translateX(100%);
-}
-
-.card.right .offset {
-  left: -4rem;
-  transform: translateX(-100%);
-  right: unset;
-}
-
-.offset span {
-  color: var(--clr-title);
-  font-size: var(--fs-date);
-  margin-top: 3rem;
-  min-width: 15rem;
-}
-
-.right .offset span {
-  text-align: right;
-}
-
 
 @keyframes load {
   from {
@@ -271,8 +242,12 @@
   }
   .card {
     width: 100%;
-    padding-left: 6rem;
-    padding-right: 2rem;
+    padding: 0 1rem 0 6rem;
+  }
+  .card.right {
+    left: 0;
+    margin: .4rem 0;
+    padding: 0 1rem 0 6rem;
   }
   .card::before {
     left: calc(2% + .1rem);
@@ -293,16 +268,10 @@
     transform: rotate(-135deg);
   } 
 
-  .card.right {
-    left: 0;
-  }
-
-  .card .offset { display: none; }
 }
 
 @media only screen and (max-width: 680px) {
   .timeline .events::before, .timeline .events::after {
-    /* left: 1.6%; */
     left: 3%;
   }
 
@@ -315,10 +284,6 @@
   }
 
   .card::before {
-    width: .8rem;
-    height: .8rem;
-    border-width: .5rem;
-    top: 3.8rem;
     left: calc(3% + .1rem);
   }
   .card.right::before {
@@ -328,8 +293,6 @@
 
 @media screen and (max-width: 200px) {
   .card .info img { display: none; }
-  .card .info h3 { display: none; }
-  .card .info button { display: none; }
 
 }
 

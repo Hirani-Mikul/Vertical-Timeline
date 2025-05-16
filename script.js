@@ -2,6 +2,9 @@ const tlEventsElm = document.querySelector('.timeline .events'); // Events secti
 const tlFooterElm = document.getElementById('tl-footer'); // Timeline footer.
 
 const URL = "http://localhost:3000/request.php";
+const URL_LOCAL = "./events.json";
+
+
 
 // GLOBAL STATE for tracking the process of fetching and displaying the events on the timeline.
 const STATE = {
@@ -80,16 +83,14 @@ const createEventCardHTML = (event, isRight) => {
   if (STATE.isRightCard) cardElm.classList.add('right'); // Add class for right side
 
   cardElm.innerHTML = `
-      <section class="info">
-        ${event.eventImage.trim() ? `<img src="${event.eventImage}" alt="${event.bDate}"></img>` : ""}
+  <section class="info">
+      <span>${event.eventDate.trim() ? event.eventDate : "--"}</span>
+      ${event.eventImage.trim() ? `<img src="${event.eventImage}" alt="${event.bDate}"></img>` : ""}
 
-        ${event.eventDescription.trim() || event.eventItems.length ? `<p>${event.eventDescription} <br/> ${event.eventItems.length ? event.eventItems.map((item, index) => { return (index + 1) + ". " + item.item + "<br/>"; }).join("") : ""
+      ${event.eventDescription.trim() || event.eventItems.length ? `<p>${event.eventDescription} <br/> ${event.eventItems.length ? event.eventItems.map((item, index) => { return (index + 1) + ". " + item.item + "<br/>"; }).join("") : ""
       } </p>` : "<p>No description available.</p>"}
-      
-          </section>
-      <section class="offset">
-        <span>${event.eventDate.trim() ? event.eventDate : "Unspecified"}</span>
-      </section>
+    
+    </section>
   `;
 
 
@@ -236,14 +237,19 @@ const createMessageHTML = (message, state = 1) => {
 }
 
 // Fetch and render events.
-const fetchAndRenderEvents = async () => {
+const fetchAndRenderEvents = async (url = URL) => {
 
   updateTlFooter(); // Loading state.
 
   // 0: no more events
   try {
-    const data = await fetchEventsFromSource(URL); // fetch events.
-    if (!data || !data.events.length) return createMessageHTML("END", 1); // No events or No more events.
+    const data = await fetchEventsFromSource(url); // fetch events.
+    if (!data || !data.events.length)
+    {
+
+      createMessageHTML("END", 1); // No events or No more events.
+      return 0;
+    } 
 
     STATE.lastFetchedEventIndex = data.LASTFETCHEDINDEX; // Update the last fetched event index.
     renderEventsToDOM(data.events); // Render events.
@@ -253,23 +259,24 @@ const fetchAndRenderEvents = async () => {
     // Observe the entry of the last event card for loading more events.
     loadMoreEventsObserver.observe(tlEventsElm.querySelector(".card:last-child"));
 
+    return 1;
+
   } catch (error) {
     createMessageHTML(error, 2); // Display error.
+    return 2;
   }
 }
 
 const Initiate = async () => {
-  let status = await fetchAndRenderEvents();
+
+
+  if (await fetchAndRenderEvents() != 1) return;
 
   hightlightTMobserver.observe(tlEventsElm); // Observe the timeline element for visibility
 
 }
 
 Initiate();
-
-
-
-
 
 
 
