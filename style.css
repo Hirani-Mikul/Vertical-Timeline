@@ -170,23 +170,16 @@
 }
 
 /* Styles for invisible markers for each card on the timeline. */
-.timeline .events span.marker {
+.card span.marker {
   position: absolute;
   right: 0;
-  top: 50%;
-  /* top: -5rem; */
-  /* display: block; */
   width: 16px;
   height: 16px;
   background-color: red;
   z-index: 100;
   border-radius: 1000px;
 }
-.timeline .events span.marker:last-child {
-  top: 100%;
-}
-
-.timeline .events .card.right span.marker {
+.card.right span.marker {
   left: 0;
 }
 
@@ -287,6 +280,10 @@
 
   .card .info {
     transform: translateX(110%);
+  }
+
+  .card span.marker {
+    left: 0;
   }
 
   .card .info::after {

@@ -2,10 +2,9 @@ const tlEventsElm = document.querySelector('.timeline .events'); // Events secti
 const tlFooterElm = document.getElementById('tl-footer'); // Timeline footer.
 
 const URL = "http://localhost:3000/request.php";
-const URL_LOCAL = "./events.json";
 
-let tempCounter = 0;
-
+const MAX_NO_MARKERS = 2;
+let markerIndexCounter = 0;
 const visibleMarkers = new Set();
 
 
@@ -24,8 +23,6 @@ const observerManager = {
     showEventCardObserver.disconnect();
     loadMoreEventsObserver.disconnect();
     hightlightTMobserver.disconnect();
-
-    document.removeEventListener('scroll', calcTMlineHeight);
   },
 
   observeEventsContainer() { // Observe the event's section for it's entry.
@@ -147,28 +144,16 @@ const createEventCardHTML = (event, isRight) => {
   </section>
   `;
 
-  // Create a marker before the card, and another one half way the card.
-  const markerElm = document.createElement("span");
-  markerElm.classList.add('marker');
-  const markerElm2 = document.createElement("span");
-  markerElm2.classList.add('marker');
-
-  markerElm.dataset.progress = ++tempCounter;
-  markerElm2.dataset.progress = ++tempCounter;
-  
-  cardElm.appendChild(markerElm);
-  cardElm.appendChild(markerElm2);
-
-  // cardElm.innerHTML = `
-  // <section class="info">
-  //     <span>${event.eventDate.trim() ? event.eventDate : "--"}</span>
-  //     ${event.eventImage.trim() ? `<img src="${event.eventImage}" alt="${event.bDate}"></img>` : ""}
-
-  //     ${event.eventDescription.trim() || event.eventItems.length ? `<p>${event.eventDescription} <br/> ${event.eventItems.length ? event.eventItems.map((item, index) => { return (index + 1) + ". " + item.item + "<br/>"; }).join("") : ""
-  //     } </p>` : "<p>No description available.</p>"}
-    
-  //   </section>
-  // `;
+  // Create invisible markers along the cards, for vertical height calculation.
+  for (let i = 0; i < MAX_NO_MARKERS; i++)
+  {
+    const markerElm = document.createElement('span'); // Create element span
+    markerElm.classList.add('marker'); // Add predefined class for styles.
+    let topStyle = Math.round((i + 1) / MAX_NO_MARKERS * 100); // Position for marker. How far from top of the card.
+    markerElm.style.top = (topStyle + '%');
+    markerElm.dataset.index = ++markerIndexCounter;
+    cardElm.appendChild(markerElm);
+  }
 
 
   return cardElm;
@@ -185,38 +170,33 @@ const renderEventsToDOM = (events) => {
   });
 }
 
+const calcTMlineHeight = () => {
+  let highestTop = 0;
+  visibleMarkers.forEach(marker => {
+    if (marker.getBoundingClientRect().top > highestTop) highestTop = marker.getBoundingClientRect().top;
+  });
+
+  const parentTop = tlEventsElm.getBoundingClientRect().top;
+  const progress = (highestTop - parentTop) / tlEventsElm.offsetHeight;
+  const height = Math.max(1, Math.min(100, progress * 100));
+  
+  tlEventsElm.style.setProperty('--TM-lineHeight', `${height}%`);
+}
+
 const markerObserver = new IntersectionObserver((entries, observer) => {
   entries.forEach(entry => {
-    const index = parseInt(entry.target.dataset['progress'], 10);
+
     if (entry.isIntersecting) {
-      visibleMarkers.add(index);
-    } 
+      visibleMarkers.add(entry.target);
+      entry.target.style.backgroundColor = 'green';
+    }
     else {
-      visibleMarkers.delete(index);
+      visibleMarkers.delete(entry.target);
       entry.target.style.backgroundColor = 'tomato';
     }
 
-    const highestIndex = visibleMarkers.size ? Math.max(...visibleMarkers) : 0;
-    document.querySelectorAll('.marker').forEach(marker => {
-      if (marker.dataset['progress'] == highestIndex)
-      {
-        // Calculate the position difference.
-        let parentY = (tlEventsElm.getBoundingClientRect().y);
-        let markerY = marker.getBoundingClientRect().y;
-        let height = markerY - parentY;
-        console.log('Updating height: ' + height);
+    calcTMlineHeight();
 
-        marker.style.backgroundColor = 'green';
-
-        tlEventsElm.style.setProperty('--TM-lineHeight', `${height}px`);
-
-        // Height of the vertical line is calculated as a percentage of the total height of the timeline's events section element.
-        // -2 is an offset acting as a reveal point.
-        // let height = Math.round((revealTop + viewHeight) / clientHeight * 100) - 2;
-
-      }
-    });
-    // document.querySelectorAll('.marker').forEach(marker => parseInt(marker.dataset['progress']) == highestIndex ? marker.style.backgroundColor = 'green' : "");
   });
 }, {
   root: null, // Intersection area, null means full client screen view.
@@ -226,24 +206,6 @@ const markerObserver = new IntersectionObserver((entries, observer) => {
 
 // CHECK THE ENTRY OF TIMELINE ITSELF.
 
-// Calculate the height of vertical line based on how much of total timeline's events section is visible.
-const calcTMlineHeight = () => {
-  let viewHeight = window.innerHeight; // Height of the viewport/client area screen.
-  let clientHeight = tlEventsElm.getBoundingClientRect().height; // Height of the events section element
-  let revealTop = (tlEventsElm.getBoundingClientRect().y * -1); // Top of the timeline's events section.
-
-  // Height of the vertical line is calculated as a percentage of the total height of the timeline's events section element.
-  // -2 is an offset acting as a reveal point.
-  let height = Math.round((revealTop + viewHeight) / clientHeight * 100) - 2;
-
-  // Constraints for the height of the vertical line.
-  if (height > 100) height = 100;
-  if (height < 1) height = 1;
-
-  // Setting the variable property of the events section.
-  // CSS is reading this property to adjust the height of the vertical line.
-  tlEventsElm.style.setProperty('--TM-lineHeight', `${height}%`);
-}
 
 // ONLY IF TIMELINE'S EVENTS SECTION BECOMES VISIBLE, CHECK THE ENTRY OF EVENTS ITSELF
 const showEventCardObserver = new IntersectionObserver((entries, observer) => {
@@ -284,18 +246,11 @@ const hightlightTMobserver = new IntersectionObserver((entries, observer) => {
   const eventsSection = entries[0];
 
   if (eventsSection.isIntersecting) { // Update vertical line height and observe entry of event cards.
-    // calcTMlineHeight(); // Calculate the height of the vertical line when the timeline is in view
-    // document.addEventListener('scroll', calcTMlineHeight); // Add a scroll listener, to update height as the user scrolls.
 
     // Observe each inactive event card for entry.
     observerManager.observeInactiveEventCards();
 
-  } else { // If not intersecting, then.
-    // Remove scroll listener, no need if the events section is not in view.
-    // document.removeEventListener('scroll', calcTMlineHeight);
-
-    // Reset the height of the vertical line.
-    // timelineElm.style.setProperty('--TM-lineHeight', `0%`);
+  } else {
 
     // Unobserve each event card.
     observerManager.unobserveActiveEventCards();
