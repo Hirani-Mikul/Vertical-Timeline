@@ -19,7 +19,7 @@
           // Extract data from post body.
 
 
-          $MAXEVENTSTOFETCH = 30;
+          $MAXEVENTSTOFETCH = 5;
           $LASTFETCHEDINDEX = $data['LASTFETCHEDINDEX'];
           $SELECTEDLANGUAGE = $data['SELECTEDLANGUAGE'];
 
