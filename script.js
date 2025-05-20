@@ -4,25 +4,32 @@ const tlFooterElm = document.getElementById('tl-footer'); // Timeline footer.
 const URL = "http://localhost:3000/request.php";
 
 const MAX_NO_MARKERS = 2;
-let markerIndexCounter = 0;
-const visibleMarkers = new Set();
-
 
 // GLOBAL STATE for tracking the process of fetching and displaying the events on the timeline.
 const STATE = {
   selectedLanguage: 'ENGLISH', // Current event's language.
   tlFooterCurrentClass: null, // Timeline footer; Loading, Message, Error.
   isRightCard: false, // To keep track of event cards that are displayed on right side.
-  lastFetchedEventIndex: 0 // Index of last event fetched from the server.
+  lastFetchedEventIndex: 0, // Index of last event fetched from the server.
+  visibleMarkers: new Set(), // Store all currently visible markers.
+  markerIndexCounter: 0 // Index counter for markers.
 };
 
 // Handle observer's lifecycle
 const observerManager = {
   
-  disconnectAll() { // Disconnect all observers and remove scroll listener.
+  unobserveAll() { // Unobserve all elements of all observers.
+    observerManager.unobserveActiveEventCards();
+    observerManager.unobserveLastCard(document.querySelector('.card:last-child'));
+    observerManager.unobserveEventsContainer();
+    observerManager.unobserveMarkers();
+  },
+
+  disconnectAll() { // Disconnect all observers.
     showEventCardObserver.disconnect();
     loadMoreEventsObserver.disconnect();
     hightlightTMobserver.disconnect();
+    markerObserver.disconnect();
   },
 
   observeEventsContainer() { // Observe the event's section for it's entry.
@@ -56,6 +63,18 @@ const observerManager = {
     document.querySelectorAll('.card.active').forEach(event => {
       showEventCardObserver.unobserve(event); 
     });
+  },
+
+  observeNewMarkers(markers) { // Observe new markers.
+    markers.forEach(marker => markerObserver.observe(marker));
+  },
+  
+  observeMarkers() { // Observe all markers.
+    document.querySelectorAll('.marker').forEach(marker => markerObserver.observe(marker));
+  },
+
+  unobserveMarkers() { // Unobserve all markers.
+    document.querySelectorAll('.marker').forEach(marker => markerObserver.unobserve(marker));
   }
 
 }
@@ -150,8 +169,8 @@ const createEventCardHTML = (event, isRight) => {
     const markerElm = document.createElement('span'); // Create element span
     markerElm.classList.add('marker'); // Add predefined class for styles.
     let topStyle = Math.round((i + 1) / MAX_NO_MARKERS * 100); // Position for marker. How far from top of the card.
-    markerElm.style.top = (topStyle + '%');
-    markerElm.dataset.index = ++markerIndexCounter;
+    markerElm.style.top = (topStyle + '%'); // Setting the position.
+    markerElm.dataset.index = ++STATE.markerIndexCounter; // Use custom data index to distinguish each marker.
     cardElm.appendChild(markerElm);
   }
 
@@ -167,32 +186,37 @@ const renderEventsToDOM = (events) => {
     tlEventsElm.appendChild(cardElm); // Append event card.
     STATE.isRightCard = !STATE.isRightCard; // Toggle for alternating sides.
     observerManager.observeIndividualCard(cardElm); // Observe the card for entry in viewport.
+    observerManager.observeNewMarkers(cardElm.querySelectorAll('.marker'));
   });
 }
 
 const calcTMlineHeight = () => {
-  let highestTop = 0;
-  visibleMarkers.forEach(marker => {
-    if (marker.getBoundingClientRect().top > highestTop) highestTop = marker.getBoundingClientRect().top;
-  });
-
-  const parentTop = tlEventsElm.getBoundingClientRect().top;
-  const progress = (highestTop - parentTop) / tlEventsElm.offsetHeight;
-  const height = Math.max(1, Math.min(100, progress * 100));
+  let highestTop = 1; // Latest visible marker. 1 for resulting minimum height as 1%.
   
-  tlEventsElm.style.setProperty('--TM-lineHeight', `${height}%`);
+  // Find out: Of all visible markers, which is the most furthest down.
+  for (const marker of STATE.visibleMarkers) {
+    let markerTop = marker.getBoundingClientRect().top; // Marker's offset from top of the viewport.
+    highestTop = Math.max(markerTop, highestTop);
+  }
+  
+  // eventsSecTop can be put in global scope, to avoid recalculation at every call. May not change, unless viewport height changes.
+  const eventsSecTop = tlEventsElm.getBoundingClientRect().top; // Events section's offset from the top of the viewport. 
+  const offsetFromEventsSec = (highestTop - eventsSecTop) / tlEventsElm.offsetHeight; // Marker's actual offset from top of the Events section.
+  const height = Math.round(Math.max(1, Math.min(100, offsetFromEventsSec * 100))); // Final height of the vertical line.
+  
+  tlEventsElm.style.setProperty('--TM-lineHeight', `${height}%`); // Update the height now.
 }
 
 const markerObserver = new IntersectionObserver((entries, observer) => {
   entries.forEach(entry => {
 
     if (entry.isIntersecting) {
-      visibleMarkers.add(entry.target);
-      entry.target.style.backgroundColor = 'green';
+      STATE.visibleMarkers.add(entry.target);
+      entry.target.style.backgroundColor = 'green'; // For debugging. Remove this line.
     }
     else {
-      visibleMarkers.delete(entry.target);
-      entry.target.style.backgroundColor = 'tomato';
+      STATE.visibleMarkers.delete(entry.target);
+      entry.target.style.backgroundColor = 'tomato'; // For debugging. Remove this line.
     }
 
     calcTMlineHeight();
@@ -205,7 +229,6 @@ const markerObserver = new IntersectionObserver((entries, observer) => {
 });
 
 // CHECK THE ENTRY OF TIMELINE ITSELF.
-
 
 // ONLY IF TIMELINE'S EVENTS SECTION BECOMES VISIBLE, CHECK THE ENTRY OF EVENTS ITSELF
 const showEventCardObserver = new IntersectionObserver((entries, observer) => {
@@ -239,8 +262,8 @@ const loadMoreEventsObserver = new IntersectionObserver(async (entries, observer
 
 
 // Check for intersection of timeline events section with the viewport.
-// Update the height of vertical line.
 // Observe individual event card for entry.
+// Observe markers to update the height of vertical line.
 const hightlightTMobserver = new IntersectionObserver((entries, observer) => {
 
   const eventsSection = entries[0];
@@ -254,6 +277,9 @@ const hightlightTMobserver = new IntersectionObserver((entries, observer) => {
 
     // Unobserve each event card.
     observerManager.unobserveActiveEventCards();
+
+    // Unobserve markers.
+    observerManager.unobserveMarkers();
   }
 
 }, {
@@ -266,12 +292,10 @@ const hightlightTMobserver = new IntersectionObserver((entries, observer) => {
 const resetEventsSection = () => {
 
   
-  // Unobserve all event cards, last event card, and events container.
-  observerManager.unobserveActiveEventCards();
-  observerManager.unobserveLastCard(document.querySelector('.card:last-child'));
-  observerManager.unobserveEventsContainer();
+  // Unobserve all event cards, last event card, events container, and markers.
+  observerManager.unobserveAll();
 
-  // Disconnect all observers and remove scroll listener.
+  // Disconnect all observers.
   observerManager.disconnectAll();
 
   tlEventsElm.innerHTML = '';
@@ -312,7 +336,7 @@ const fetchAndRenderEvents = async (url = URL) => {
     updateTlFooter(-1); // Remove the current class state.
 
     // Observe the entry of the last event card for loading more events.
-    // observerManager.observeLastCard();
+    observerManager.observeLastCard();
 
     return 1;
 
@@ -327,10 +351,7 @@ const Initiate = async () => {
 
   if (await fetchAndRenderEvents() != 1) return;
 
-  hightlightTMobserver.observe(tlEventsElm); // Observe the timeline element for visibility
-
-  document.querySelectorAll('.marker').forEach(marker => markerObserver.observe(marker));
-
+  observerManager.observeEventsContainer(); // Observe the entry of Events section.
 }
 
 Initiate();

@@ -31,6 +31,7 @@
   --img-size: 20rem;
 
   margin: 10rem auto;
+  margin-bottom: 100rem;
   width: 100%;
   max-width: 92rem;
   border: .1rem solid var(--clr-border);
@@ -90,7 +91,7 @@
 }
 
 .timeline #tl-footer.message p,
-.timeline #tl-footer.error {
+.timeline #tl-footer.error p {
   display: block;
 }
 
