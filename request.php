@@ -33,7 +33,7 @@
 
             http_response_code(200);
             
-            echo json_encode(['LASTFETCHEDINDEX' => $LASTFETCHEDINDEX, 'events' => []]);
+            echo json_encode(['events' => [], 'LASTFETCHEDINDEX' => $LASTFETCHEDINDEX]);
 
             return;
           }

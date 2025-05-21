@@ -12,7 +12,7 @@ const STATE = {
   isRightCard: false, // To keep track of event cards that are displayed on right side.
   lastFetchedEventIndex: 0, // Index of last event fetched from the server.
   visibleMarkers: new Set(), // Store all currently visible markers.
-  markerIndexCounter: 0 // Index counter for markers.
+  markerIndexCounter: 0 // Index counter for markers. 
 };
 
 // Handle observer's lifecycle
@@ -80,19 +80,19 @@ const observerManager = {
 }
 
 // Utility function to display appropriate statuses in the timeline footer.
-const updateTlFooter = (state = 0) => {
+const updateTlFooter = (state = 2) => { // Default loading state.
   // -1 -> No state.
-  //  0 -> Loading state.
-  //  1 -> Just a message.
-  //  2 -> Error message.
+  //  0 -> Error message or failure.
+  //  1 -> Just a message or success.
+  //  2 -> Loading state.
 
   // Remove current class.
   if (STATE.tlFooterCurrentClass) tlFooterElm.classList.remove(STATE.tlFooterCurrentClass); 
 
   if (state == -1) return STATE.tlFooterCurrentClass = null;
-  else if (state == 0) STATE.tlFooterCurrentClass = 'load';
+  else if (state == 0) STATE.tlFooterCurrentClass = 'error';
   else if (state == 1) STATE.tlFooterCurrentClass = 'message';
-  else if (state == 2) STATE.tlFooterCurrentClass = 'error';
+  else if (state == 2) STATE.tlFooterCurrentClass = 'load';
 
   tlFooterElm.classList.add(STATE.tlFooterCurrentClass);
 
@@ -114,7 +114,7 @@ document.getElementById('language').addEventListener('change', async (event) => 
 
 });
 
-// Fetch events and return a promise.
+// Fetch events and return a promise. Returns an object with state (error or success) and data array or error message.
 const fetchEventsFromSource = (sourceURL) => {
   return new Promise((resolve, reject) => {
 
@@ -128,16 +128,17 @@ const fetchEventsFromSource = (sourceURL) => {
 
       throw new Error(response.message);
     }) // End of first then.
-    .then(data => {
-      if (!data.events.length) resolve(0); // If everything okay, but no more events.
+    .then(data => { // content of data: { events: [], LASTFETCHEDINDEX: 0 }. Array and Integer.
 
-      resolve(data); // Pass the data to the resolve function.
+      if (!data.events.length) resolve({ status: -1, message: "END" }); // If everything okay, but no more events.
+
+      resolve({ status: 1, ...data }); // Pass the data to the resolve function.
 
     }) // End of second then.
-    .catch(error => { reject(error.message); })
+    .catch(error => { reject({ status: 0, message: error.message }); })
 
-  }); // End of promise.
-}
+  }); // End of promise{}.
+} // End of fetchEventsFromSource().
 
 // Construct HTML for event card.
 const createEventCardHTML = (event, isRight) => {
@@ -147,8 +148,11 @@ const createEventCardHTML = (event, isRight) => {
 
   if (STATE.isRightCard) cardElm.classList.add('right'); // Add class for right side
 
+  // Extract values from event object.
   const date = event.eventDate.trim() ? event.eventDate : "--";
+
   const image = event.eventImage.trim() ? `<img src="${event.eventImage}" loading="lazy" onerror="this.style.display='none';" alt="${date}"></img>` : "";
+
   const description = event.eventDescription.trim() ? event.eventDescription : "";
 
   const descItems = event.eventItems.length ? event.eventItems.map((item, index) => {
@@ -185,8 +189,9 @@ const renderEventsToDOM = (events) => {
     const cardElm = createEventCardHTML(event, STATE.isRightCard); // Create event card HTML.
     tlEventsElm.appendChild(cardElm); // Append event card.
     STATE.isRightCard = !STATE.isRightCard; // Toggle for alternating sides.
+
     observerManager.observeIndividualCard(cardElm); // Observe the card for entry in viewport.
-    observerManager.observeNewMarkers(cardElm.querySelectorAll('.marker'));
+    observerManager.observeNewMarkers(cardElm.querySelectorAll('.marker')); // Observe each marker.
   });
 }
 
@@ -205,6 +210,7 @@ const calcTMlineHeight = () => {
   const height = Math.round(Math.max(1, Math.min(100, offsetFromEventsSec * 100))); // Final height of the vertical line.
   
   tlEventsElm.style.setProperty('--TM-lineHeight', `${height}%`); // Update the height now.
+
 }
 
 const markerObserver = new IntersectionObserver((entries, observer) => {
@@ -320,15 +326,10 @@ const fetchAndRenderEvents = async (url = URL) => {
 
   updateTlFooter(); // Loading state.
 
-  // 0: no more events
   try {
     const data = await fetchEventsFromSource(url); // fetch events.
-    if (!data || !data.events.length)
-    {
 
-      createMessageHTML("END", 1); // No events or No more events.
-      return 0;
-    } 
+    if (data.status == -1) return createMessageHTML("END", 1); // No events or No more events.
 
     STATE.lastFetchedEventIndex = data.LASTFETCHEDINDEX; // Update the last fetched event index.
     renderEventsToDOM(data.events); // Render events.
@@ -338,12 +339,16 @@ const fetchAndRenderEvents = async (url = URL) => {
     // Observe the entry of the last event card for loading more events.
     observerManager.observeLastCard();
 
-    return 1;
-
   } catch (error) {
-    createMessageHTML(error, 2); // Display error.
-    return 2;
+    createMessageHTML(error.message, 0); // Display error.
+
   }
+}
+
+const init = async () => {
+  // Fetch events.
+  // Render events.
+  // Observe everything.
 }
 
 const Initiate = async () => {
