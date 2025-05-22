@@ -1,3 +1,5 @@
+/* REPLACE ALL OCCURANCE OF '.timeline' WITH ELEMENTOR UNIQUE ID. */
+
 
 /* Addressing the repeatative code */
 .timeline *::before, .timeline *::after {
@@ -11,108 +13,95 @@
   box-sizing: border-box;
 }
 
-.timeline {
+.timeline { /* Styles for entire timeline. */
 
-    /* COLORS */
+  /* Typography */
+  --ff-sans-mont: "Montserrat", sans-serif;
+
+  /* Font size */
+  --fs-description: 1.2rem;
+  --fs-date: 1rem;
+
+  /* Font weight */
+  --fw-date: 500;
+  --fw-description: normal;
+
+  /* Colors */
   
-  --clr-background: #ffffff;
   --clr-description: #5f5f5f;
   --clr-secondary: #3f3f3f; 
   --clr-error: rgb(255, 50, 50);
   --clr-border: #aaa;
   --clr-card-border: #c9c9c9;
-
-  /* FONT SIZE */
-  --fs-description: 1.2rem;
-  --fs-normal: 1.3rem;
-  --fs-date: 1rem;
-
-  /* FONT WEIGHT */
+  --clr-bg-white: #ffffff;
 
   /* IMAGE SIZE */
   --img-size: 20rem;
 
-  margin: 10rem auto;
+  margin: 0 auto;
   width: 100%;
   max-width: 92rem;
   border: .1rem solid var(--clr-border);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-
+  font-family: var(--ff-sans-mont);
 }
 
-.timeline > * {
+.timeline > * { /* All direct children of timeline. */
   width: 100%;
 }
 
-.timeline .controls {
+/* Styles for header and footer of timeline. */
+.timeline .controls,
+.timeline .tl-footer {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  min-height: 5rem;
+  min-height: 4rem;
+}
+
+.timeline .controls {
   border-bottom: .1rem solid var(--clr-border);
 }
+
 .timeline .controls label {
-  font-size: var(--fs-normal);
-}
-.timeline .controls input {
+  font-size: var(--fs-description);
   margin: 0 1rem;
 }
 
-.timeline #tl-footer {
-  min-height: 4rem;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-.timeline #tl-footer.load::after, .timeline #tl-footer.load::before {
-  width: 1.4rem;
-  height: 1.4rem;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 1000px;
-  background-color: transparent;
-}
-.timeline #tl-footer.load::after {
-  background-color: var(--clr-background);
+.timeline .tl-footer.load p {
   width: 2rem;
   height: 2rem;
-  z-index: -1;
+  border-radius: 1000px;
+  background-color: transparent;
   border-right: .3rem solid var(--clr-secondary);
   animation: load 2000ms infinite linear;
 }
 
-.timeline #tl-footer p {
-  display: none;
+.timeline .tl-footer.error p,
+.timeline .tl-footer.message p {
+  display: block;
   font-size: var(--fs-date);
   font-weight: 500;
   color: var(--clr-secondary);
 }
 
-.timeline #tl-footer.message p,
-.timeline #tl-footer.error p {
-  display: block;
-}
-
-.timeline #tl-footer.error p {
+.timeline .tl-footer.error p {
   color: var(--clr-error); 
 }
+/* End of styles for header and footer */
 
+/* Styles for events container and event cards. */
 
-
-.timeline .events {
+.timeline .events { /* Events container */
   position: relative;
+  margin-top: 2rem;
   overflow: hidden;
-  margin: 2rem 0;
 
   --TM-lineHeight: 0%;
   --clr-line-hidden: #33333333;
   --clr-line-active: #333;
 }
 
-.timeline .events::before, .timeline .events::after {
+.timeline .events::before, .timeline .events::after { /* Vertical line styles. */
   width: .2rem;
   border-radius: 1rem;
   left: 50%;
@@ -120,12 +109,12 @@
   z-index: -1;
 }
 
-.timeline .events::after {
+.timeline .events::after { /* Greyed out vertical line. */
   height: 100%;
   background-color: var(--clr-line-hidden);
 }
 
-.timeline .events::before {
+.timeline .events::before { /* Darkest vertical line. Height is calculated using JavaScript. */
   height: var(--TM-lineHeight);
   background-color: var(--clr-line-active);
   transition: height 300ms linear;
@@ -137,27 +126,25 @@
   flex-direction: column;
   width: 50%;
   position: relative;
-  padding: 0rem 6rem 0 1rem;
+  padding: 0 6rem 0 1rem;
 }
 
 /* Alternate side: Move even positioned events to right side. */
 .card.right {
-  margin-top: -5%;
+  margin-top: -5%; /* Change, this is not the best way. */
   left: 50%;
-  padding-left: 6rem;
-  padding-right: 1rem;
+  padding: 0 1rem 0 6rem;
 }
 
-/* Circle on timeline next to each event card.*/
-.card::before {
+.card::before { /* Circle on timeline next to each event card.*/
   width: .6rem;
   height: .6rem;
   border: .4rem solid var(--clr-line-hidden);
-  border-radius: 10rem;
+  border-radius: 1000px;
   top: 3.5rem;
   right: -.1rem;
   transform: translate(50%);
-  background-color: var(--clr-background);
+  background-color: var(--clr-bg-white);
   transition: border-color 300ms linear;
 }
 /* Right side event card should display circle on left side. */
@@ -166,7 +153,7 @@
   transform: translate(-50%);
 }
 
-/* Change color when event card is in view. */
+/* Change color of circle when event card is in view. */
 .card.active::before {
   border-color: var(--clr-line-active);
 }
@@ -179,12 +166,11 @@
   height: 1px;
   opacity: 0;
 }
-.card.right span.marker {
+.card.right span.marker { /* Not important. */
   left: 0;
 }
 
-
-.card .info {
+.card .info { /* The content for cards i.e. date, description and images. */
   position: relative;
   width: 100%;
   height: 100%;
@@ -192,41 +178,38 @@
   padding: 1rem 1.4rem;
   border: .1rem solid var(--clr-card-border);
   border-radius: .6rem;
-  transform: translateX(-110%);
+  transform: translateX(-110%); /* For animation, entry from left side. */
 }
-.card.right .info {
+.card.right .info { /* Right card should enter from right side. */
   transform: translateX(110%);
 }
 
-.card.active .info {
+.card.active .info { /* Animate card when in view. */
   transform: translateX(0);
   transition: transform 400ms 200ms ease-in;
 }
 
-.card span {
+.card span { /* Styles for date. */
   display: block;
   color: var(--clr-secondary);
   font-size: var(--fs-date);
-  font-weight: 500;
+  font-weight: var(--fw-date);
   margin-bottom: .6rem;
 }
 
-.card .info img {
+.card .info img { /* Fit the image in available space. */
   width: 100%;
   object-fit: cover;
   max-height: var(--img-size);
 }
 
-.card .info p {
+.card .info p { /* Styles for description. */
   font-size: var(--fs-description);
+  font-weight: var(--fw-description);
   color: var(--clr-description);
-  /* display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
-  overflow: hidden; */
 }
 
-.card .info::after {
+.card .info::after { /* Arrows pointing to circle on timeline. */
   width: 1.2rem;
   height: 1.2rem;
   border-top: .1rem solid var(--clr-card-border);
@@ -236,96 +219,76 @@
   transform: rotate(45deg);
 }
 
-.card.right .info::after {
+.card.right .info::after { /* For right side cards, change the direction of arrow.  */
   left: -.7rem;
   right: unset;
   transform: rotate(-135deg);
 }
 
+/* End of styles for events container and event cards. */
 
-@keyframes load {
+@keyframes load { /* Loading animation. */
   from {
-    transform: translate(-50%, -50%) rotate(0deg);
+    transform: rotate(0deg);
   }
   to {
-    transform: translate(-50%, -50%) rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
 
 @media only screen and (max-width: 900px) {
-  .timeline .events::before, .timeline .events::after {
+  .timeline .events::before, .timeline .events::after { /* Shift vertical line from center to start. */
     left: 2%;
   }
-  .card {
+  .card { /* Make cards occupy full width. */
     width: 100%;
     padding: 0 1rem 0 6rem;
   }
-  .card.right {
+  .card.right { /* Shift the right card from right to start. */
     left: 0;
     margin: .4rem 0;
-    padding: 0 1rem 0 6rem;
   }
-  .card::before {
+  .card::before { /* Left cards should now display circle on left side. */
     left: calc(2% + .1rem);
     transform: translate(-50%);
   }
 
   /* For right side cards, it won't inherit from .card::before because of specificity. */
   /* Previously it was ruled by the following selection.  */
-  .card.right::before {
+  .card.right::before { /* Right side cards circle. */
     left: calc(2% + .1rem);
-    transform: translate(-50%);
   }
 
-  .card .info {
+  .card .info { /* Change the entry side of left cards. */
     transform: translateX(110%);
   }
 
-  .card span.marker {
-    left: 0;
-  }
-
-  .card .info::after {
+  .card .info::after { /* Change the direction of left card's arrow. */
     left: -.7rem;
     transform: rotate(-135deg);
   } 
 
+  .card span.marker { /* Not important. */
+    left: 0;
+  }
+
 }
 
 @media only screen and (max-width: 680px) {
-  .timeline .events::before, .timeline .events::after {
+  .timeline .events::before, .timeline .events::after { /* Moving the vertical line. */
     left: 3%;
   }
 
-  .card {
-    width: 100%;
-    padding-left: 4rem;
-  }
-  .card.right {
+  .card, .card.card.right { /* Adjustments for all cards. */
     padding-left: 4rem;
   }
 
-  .card::before {
-    left: calc(3% + .1rem);
-  }
-  .card.right::before {
+  .card::before, .card.right::before { /* Moving the circle of all cards. */
     left: calc(3% + .1rem);
   }
 }
 
-@media screen and (max-width: 200px) {
+@media screen and (max-width: 200px) { /* At this width, don't show images. */
   .card .info img { display: none; }
-
 }
-
-/* 
-.info p {
-  max-height: 150px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
-  display: -webkit-box;
-  -webkit-line-clamp: 6;
-  -webkit-box-orient: vertical;
-} */

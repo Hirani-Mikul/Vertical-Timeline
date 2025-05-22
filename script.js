@@ -1,22 +1,21 @@
 const timelineElm = document.getElementById('v-timeline'); // Entire timeline.
 const tlEventsElm = document.querySelector('.timeline .events'); // Events section.
-const tlFooterElm = document.getElementById('tl-footer'); // Timeline footer.
+const tlFooterElm = document.querySelector('.tl-footer'); // Timeline footer.
 
-const URL = "http://localhost:3000/request.php";
+const URL_ENG = "./events.json";
+const URL_GUJ = './events-guj.json';
 
 const MAX_NO_MARKERS = 2;
 let WASTIMELINESHOWN = false;
 
 // GLOBAL STATE for tracking the process of fetching and displaying the events on the timeline.
 const STATE = {
-  selectedLanguage: 'ENGLISH', // Current event's language.
+  URL: URL_ENG,
   tlFooterCurrentClass: null, // Timeline footer; Loading, Message, Error.
   isRightCard: false, // To keep track of event cards that are displayed on right side.
-  lastFetchedEventIndex: 0, // Index of last event fetched from the server.
   visibleMarkers: new Set(), // Store all currently visible markers.
   markerIndexCounter: 0 // Index counter for markers. 
 };
-
 
 // Utility function to display appropriate statuses in the timeline footer.
 const updateTlFooter = (state = 2) => { // Default loading state.
@@ -44,7 +43,9 @@ document.getElementById('language').addEventListener('change', async (event) => 
   // Disable the selection.
   radioElms.forEach(child => child.disabled = true);
 
-  STATE.selectedLanguage = event.target.value;
+  if (event.target.value == "ENGLISH") STATE.URL = URL_ENG;
+  else STATE.URL = URL_GUJ;
+
   resetEventsSection(); // Reset everything inside events section.
   await fetchAndRenderEvents();
 
@@ -57,21 +58,17 @@ document.getElementById('language').addEventListener('change', async (event) => 
 const fetchEventsFromSource = (sourceURL) => {
   return new Promise((resolve, reject) => {
 
-    fetch(sourceURL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ LASTFETCHEDINDEX: STATE.lastFetchedEventIndex, SELECTEDLANGUAGE: STATE.selectedLanguage }) // Last fetched event index and language.
-    }) // End of fetch.
+    fetch(sourceURL)
     .then(response => {
       if (response.ok) return response.json();
-
-      throw new Error(response.message);
+      
+      if (response.status == 404) throw new Error("File not found!");
     }) // End of first then.
-    .then(data => { // content of data: { events: [], LASTFETCHEDINDEX: 0 }. Array and Integer.
+    .then(data => { // content of data: []. Array of events.
 
-      if (!data.events.length) resolve({ status: -1, message: "END" }); // If everything okay, but no more events.
+      if (!data.length) resolve({ status: -1, message: "END" }); // If everything okay, but no events.
 
-      resolve({ status: 1, ...data }); // Pass the data to the resolve function.
+      resolve({ status: 1, events: data }); // Pass the data to the resolve function.
 
     }) // End of second then.
     .catch(error => { reject({ status: 0, message: error.message }); })
@@ -184,21 +181,6 @@ const ShowEventCardObserver = new IntersectionObserver((entries, observer) => {
   threshold: 0 // Trigger when % of the event card is visible
 });
 
-// Observe if the user has reached the last event card, to fetch more events from the server.
-const LoadMoreEventsObserver = new IntersectionObserver(async (entries, observer) => {
-
-  const lastCardEntry = entries[0];
-  if (!lastCardEntry.isIntersecting) return;
-
-  // Unobserve the current last card.
-  LoadMoreEventsObserver.unobserve(lastCardEntry.target)
-
-  // Fetch more events from the server.
-  await fetchAndRenderEvents();
-
-}, {}); // No options, using the default.
-
-
 // Check for intersection of timeline events section with the viewport.
 // Observe individual event card for entry.
 // Observe markers to update the height of vertical line.
@@ -211,7 +193,7 @@ const TimelineObserver = new IntersectionObserver(async (entries, observer) => {
     if(!WASTIMELINESHOWN) { // Run this code only once when the timeline first appears.
 
       // Get the selected language.
-      STATE.selectedLanguage = timelineElm.querySelector("#language input[name=language]:checked").value;
+      if (timelineElm.querySelector("#language input[name=language]:checked").value == "GUJARATI") STATE.URL = URL_GUJ; 
       await fetchAndRenderEvents();
 
       return WASTIMELINESHOWN = true;
@@ -220,9 +202,6 @@ const TimelineObserver = new IntersectionObserver(async (entries, observer) => {
     // The following code should only execute, if the timeline REAPPEARS in the viewport.
     // Observe all inactive event cards for entry.
     tlEventsElm.querySelectorAll('.card:not(.active)').forEach(event => ShowEventCardObserver.observe(event));
-
-    // Observe last fetched card.
-    LoadMoreEventsObserver.observe(tlEventsElm.querySelector('.card:last-child'));
 
     // Observe all markers.
     tlEventsElm.querySelectorAll('.marker').forEach(marker => MarkerObserver.observe(marker));
@@ -242,15 +221,11 @@ const unobserveAll = () => { // Unobserve all elements, except the timeline.
     // Unobserve all event cards.
   tlEventsElm.querySelectorAll('.card.active').forEach(event => ShowEventCardObserver.unobserve(event));
 
-  // Unobserve last fetched card.
-  LoadMoreEventsObserver.unobserve(tlEventsElm.querySelector('.card:last-child'));
-
   // Unobserve all markers.
   tlEventsElm.querySelectorAll('.marker').forEach(marker => MarkerObserver.unobserve(marker));
 }
 
 const disconnectAllObservers = () => { // Disconnect all observers, except for timeline.
-  LoadMoreEventsObserver.disconnect();
   MarkerObserver.disconnect();
   ShowEventCardObserver.disconnect();
 }
@@ -258,7 +233,7 @@ const disconnectAllObservers = () => { // Disconnect all observers, except for t
 //
 const resetEventsSection = () => {
 
-  if (STATE.lastFetchedEventIndex == 0) return;
+  if (STATE.markerIndexCounter == 0) return; // Not the best way to confirm if events are displayed in the DOM. But works.
   
   // Unobserve all event cards, last event card, and markers.
   unobserveAll();
@@ -276,101 +251,34 @@ const resetEventsSection = () => {
   
   // Reset the STATE.
   STATE.isRightCard = false;
-  STATE.lastFetchedEventIndex = 0;
+  STATE.markerIndexCounter = 0;
 }
 
 const createMessageHTML = (message, state = 1) => {
   updateTlFooter(state); // Message or Error.
-  tlFooterElm.innerHTML = `<p>${message}</p>`;
+  tlFooterElm.children[0].innerHTML = message; // Change the text of the paragraph.
 }
 
 // Fetch and render events.
-const fetchAndRenderEvents = async (url = URL) => {
+const fetchAndRenderEvents = async () => {
 
-  
   updateTlFooter(); // Loading state.
 
-
   try {
-    const data = await fetchEventsFromSource(url); // fetch events.
+    const data = await fetchEventsFromSource(STATE.URL); // fetch events.
 
     if (data.status == -1) return createMessageHTML("END", 1); // No events or No more events.
 
-    STATE.lastFetchedEventIndex = data.LASTFETCHEDINDEX; // Update the last fetched event index.
     renderEventsToDOM(data.events); // Render events.
 
-    updateTlFooter(-1); // Remove the current class state.
-
-    // Observe the entry of the last event card for loading more events.
-    LoadMoreEventsObserver.observe(tlEventsElm.querySelector('.card:last-child'));
+    createMessageHTML("END", 1); // Show message. End of timeline.
 
   } catch (error) {
     createMessageHTML(error.message, 0); // Display error.
 
   }
 }
+
 TimelineObserver.observe(timelineElm);
 
-/*
-const hightlightTMobserver = new IntersectionObserver((entries, observer) => {
 
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-
-      fetchAndRenderEvents(() => {
-        calcTMlineHeight(); // Calculate the height of the vertical line when the timeline is in view
-        document.addEventListener('scroll', calcTMlineHeight);
-
-
-        document.querySelectorAll('.card').forEach(event => {
-          showEventsObserver.observe(event); // Observe each event element
-        });
-       });
-    }
-    else {
-      document.removeEventListener('scroll', calcTMlineHeight);
-      timelineElm.style.setProperty('--TM-lineHeight', `0%`); // Reset the height of the vertical line when not in view
-      // document.documentElement.style.setProperty('--TM-lineHeight', `0%`);
-
-      document.querySelectorAll('.card').forEach(event => {
-        showEventsObserver.unobserve(event); // Observe each event element
-      });
-    }
-  });
-
-
-}, {
-  root: null,
-  rootMargin: '0px',
-  threshold: 0
-});
-
-
-*/
-
-
-
-
-
-
-
-// const loadEventsFromSource = (sourceUrl) => {
-//   return new Promise((resolve, reject) => {
-//     fetch(sourceUrl)
-//       .then((response) => {
-//         if (!response.ok)
-//         {
-//           if (response.status == 404) throw new Error("File not found!");;
-//         }
-
-//         return response.json();
-//       })
-//       .then((data) => {
-//         events = data;
-//         resolve(true);
-//       })
-//       .catch((error) => {
-//         resolve(error.message);
-//       });
-//   });
-// }
