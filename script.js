@@ -1,4 +1,4 @@
-const timelineElm = document.getElementById('v-timeline');
+const timelineElm = document.getElementById('v-timeline'); // Entire timeline.
 const tlEventsElm = document.querySelector('.timeline .events'); // Events section.
 const tlFooterElm = document.getElementById('tl-footer'); // Timeline footer.
 
@@ -155,14 +155,8 @@ const calcTMlineHeight = () => {
 const MarkerObserver = new IntersectionObserver((entries, observer) => {
   entries.forEach(entry => {
 
-    if (entry.isIntersecting) {
-      STATE.visibleMarkers.add(entry.target);
-      entry.target.style.backgroundColor = 'green'; // For debugging. Remove this line.
-    }
-    else {
-      STATE.visibleMarkers.delete(entry.target);
-      entry.target.style.backgroundColor = 'tomato'; // For debugging. Remove this line.
-    }
+    if (entry.isIntersecting) STATE.visibleMarkers.add(entry.target)
+    else STATE.visibleMarkers.delete(entry.target);
 
     calcTMlineHeight();
 
@@ -214,14 +208,16 @@ const TimelineObserver = new IntersectionObserver(async (entries, observer) => {
 
   if (eventsSection.isIntersecting) { // Update vertical line height and observe entry of event cards.
 
-    if(!WASTIMELINESHOWN) {
+    if(!WASTIMELINESHOWN) { // Run this code only once when the timeline first appears.
+
+      // Get the selected language.
+      STATE.selectedLanguage = timelineElm.querySelector("#language input[name=language]:checked").value;
       await fetchAndRenderEvents();
 
-      WASTIMELINESHOWN = true;
-
-      return;
+      return WASTIMELINESHOWN = true;
     }
 
+    // The following code should only execute, if the timeline REAPPEARS in the viewport.
     // Observe all inactive event cards for entry.
     tlEventsElm.querySelectorAll('.card:not(.active)').forEach(event => ShowEventCardObserver.observe(event));
 
@@ -231,9 +227,10 @@ const TimelineObserver = new IntersectionObserver(async (entries, observer) => {
     // Observe all markers.
     tlEventsElm.querySelectorAll('.marker').forEach(marker => MarkerObserver.observe(marker));
 
-  } else if (WASTIMELINESHOWN) {
+  } else if (WASTIMELINESHOWN) { // Execute only when the timeline leaves the viewport.
     unobserveAll();
-  } 
+  }
+  
 
 }, {
   root: null, // Default intersection viewport.
@@ -241,7 +238,7 @@ const TimelineObserver = new IntersectionObserver(async (entries, observer) => {
   threshold: 0 // Default threshold.
 });
 
-const unobserveAll = () => {
+const unobserveAll = () => { // Unobserve all elements, except the timeline.
     // Unobserve all event cards.
   tlEventsElm.querySelectorAll('.card.active').forEach(event => ShowEventCardObserver.unobserve(event));
 
@@ -252,7 +249,7 @@ const unobserveAll = () => {
   tlEventsElm.querySelectorAll('.marker').forEach(marker => MarkerObserver.unobserve(marker));
 }
 
-const disconnectAllObservers = () => {
+const disconnectAllObservers = () => { // Disconnect all observers, except for timeline.
   LoadMoreEventsObserver.disconnect();
   MarkerObserver.disconnect();
   ShowEventCardObserver.disconnect();
@@ -261,13 +258,15 @@ const disconnectAllObservers = () => {
 //
 const resetEventsSection = () => {
 
+  if (STATE.lastFetchedEventIndex == 0) return;
   
-  // Unobserve all event cards, last event card, events container, and markers.
+  // Unobserve all event cards, last event card, and markers.
   unobserveAll();
 
   // Disconnect all observers.
   disconnectAllObservers();
 
+  // Remove all content from events section.
   tlEventsElm.innerHTML = '';
 
   
@@ -288,6 +287,7 @@ const createMessageHTML = (message, state = 1) => {
 // Fetch and render events.
 const fetchAndRenderEvents = async (url = URL) => {
 
+  
   updateTlFooter(); // Loading state.
 
   try {
@@ -308,10 +308,7 @@ const fetchAndRenderEvents = async (url = URL) => {
 
   }
 }
-
 TimelineObserver.observe(timelineElm);
-
-
 
 /*
 const hightlightTMobserver = new IntersectionObserver((entries, observer) => {

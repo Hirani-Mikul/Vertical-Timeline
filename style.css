@@ -1,4 +1,4 @@
-::before, ::after {
+.timeline *::before, .timeline *::after {
   content: "";
   position: absolute;
 }
@@ -31,7 +31,6 @@
   --img-size: 20rem;
 
   margin: 10rem auto;
-  margin-bottom: 100rem;
   width: 100%;
   max-width: 92rem;
   border: .1rem solid var(--clr-border);
@@ -141,7 +140,7 @@
 
 /* Alternate side: Move even positioned events to right side. */
 .card.right {
-  margin-top: -2%;
+  margin-top: -5%;
   left: 50%;
   padding-left: 6rem;
   padding-right: 1rem;
@@ -174,11 +173,9 @@
 .card span.marker {
   position: absolute;
   right: 0;
-  width: 16px;
-  height: 16px;
-  background-color: red;
-  z-index: 100;
-  border-radius: 1000px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
 }
 .card.right span.marker {
   left: 0;
