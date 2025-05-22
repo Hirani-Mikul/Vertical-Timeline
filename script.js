@@ -290,6 +290,7 @@ const fetchAndRenderEvents = async (url = URL) => {
   
   updateTlFooter(); // Loading state.
 
+
   try {
     const data = await fetchEventsFromSource(url); // fetch events.
 

@@ -1,3 +1,5 @@
+
+/* Addressing the repeatative code */
 .timeline *::before, .timeline *::after {
   content: "";
   position: absolute;
